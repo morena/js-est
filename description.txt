@@ -1,0 +1,13 @@
+Build a JavaScript application that;
+- Validates the input fields against the following rules;
+	- the text input must only contain alpha, numeric, or whitespace characters
+	- the checkbox must be checked
+	- one radio button is checked
+	- an option other than 'please select' is chosen from the drop-down
+- When the form is valid make an AJAX request for /data/test.json
+- On success of the request build the new set of panels out of the data and append them to the results section
+- On failure of the request display an error message
+
+The application must be written in such a way so that any generic functionality is re-usable.
+
+The application can make use of any third-party libraries deemed necessary.
