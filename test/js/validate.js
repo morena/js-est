@@ -1,19 +1,19 @@
 function validateForm(){
 
-	var isFormValid = true;
+	var isTextFieldValid = true;
+	var isDropdownValid = false;
 
-	//validate the  text input
-	//when the mouse moves out of the field
+	//validate the text input
 	$("#testForm input[type=text]").blur(function(){
 		//capture the value
-		field = $(this);
+		var field = $(this);
 		//set up the pattern
-		pattern = new RegExp(/[^(\d\w\s)]/g);
+		var pattern = new RegExp(/[^(\d\w\s)]/g);
 		//set up the error message
-		error = 'You must only enter alpha, numeric, or whitespace characters.';
+		var errorMsg = 'You must only enter alpha, numeric, or whitespace characters.';
 
 		//validate
-		validateField(field, pattern, errorMsg);
+		isTextFieldValid = validateField(field, pattern, errorMsg);
 	});
 
 	//validation on submit
@@ -22,46 +22,70 @@ function validateForm(){
 		e.preventDefault();
 		
 		//check the checkbox has been ticked
-		checkbox = $("#testForm input[type=checkbox]");
-		var isCheckboxChecked = checkbox.prop('checked');
+		var $checkbox = $("#testForm input[type=checkbox]");
+		var isCheckboxChecked = $checkbox.prop('checked');
+		var errorMsg = 'You must tick this checkbox.';
+
 		if( isCheckboxChecked === false){
-			errorMsg = 'You must tick this checkbox.';
-			appendErrorMsg(checkbox, errorMsg);
+			appendErrorMsg($checkbox, errorMsg);
 		}else{
-			removeErrors(checkbox);
+			removeErrors($checkbox);
 		}
 
-		//check one of the radio button has been selected
+		//check if at least one of the radio button has been selected
 		var isRadioBtnChecked = false;
-		radioBtns = $("#testForm input[type=radio]");
-		//just a placeholder where to add the error message if the field is not filled
-		var field = radioBtns;
-		radioBtns.each(function(){
+		var $radioField = $("#testForm input[type=radio]");
+
+		$("#testForm input[type=radio]").each(function(){
 			if($(this).prop('checked') === true){
-				field = $(this);
+				//if so we want to set our flag to true
 				isRadioBtnChecked = true;
 			}
 		});
+
+		//if the flag is still set to false
+		//we want to report the error
 		if( isRadioBtnChecked === false){
 			errorMsg = 'You must select at least one radio button.';
-			appendErrorMsg(field, errorMsg);
+			appendErrorMsg($radioField, errorMsg);
 		}else{
-			removeErrors(field);
+			//otherwise remove it
+			removeErrors($radioField);
 		}
 
 		//validate the dropdown
-		var selectField = $("#testForm #select")
-		var selectFieldValue = selectField.val();
-		if(selectFieldValue.length == 0){
-			errorMsg = 'You must select an option from the dropdown.';
-			appendErrorMsg(selectField, errorMsg);
-
+		//if the value of the field is nothing/no value
+		//we report the error
+		var dropdownField = $("#testForm select");
+		if(!$("#testForm select").val()){
+			errorMsg = "You must select an option";
+			appendErrorMsg(dropdownField, errorMsg);
 		}else{
-			removeErrors(selectField);
+			removeErrors(dropdownField);
+			isDropdownValid = true;
 		}
 
-		console.log(isFormValid);
 
+		//if all the fields are valid
+		if(isTextFieldValid === true 
+			&& isCheckboxChecked === true 
+			&& isRadioBtnChecked === true 
+			&& isDropdownValid){	
+			//make the ajax request
+			$.ajax({
+				type: "GET",
+				dataType: "json",
+				url: "../data/test.json"
+			})
+			.done(function(data){
+				populateData(data.panels);
+			})
+			.fail(function(){
+				alert("Sorry there was an error.");
+			});
+		}else{
+			alert("Please correct errors in the form before submitting it.");
+		}
 	});
 
 }
@@ -77,10 +101,11 @@ function validateField(field, pattern, errorMsg){
     if(hasIllegalChars){
     	appendErrorMsg(field, errorMsg);
     	field.focus();
-    	isFormValid = true;
+    	return false;
     }else{
     	//remove any existing errors
     	removeErrors(field);
+    	return true;
     }
 
 }
@@ -98,7 +123,19 @@ function removeErrors(field){
 	$('.error', parent).remove();
 }
 
-
+function populateData(panels){
+	//iterate through the array of panels
+	$.each(panels, function(k, v){
+		links = '';
+		//iterate through the links
+		$.each(v.links, function(l, b){
+			links += '<li><a href="'+b.url+'">'+b.title+'</a></li>';
+		});
+		//for each panel add a .resultItem within #results
+		//ideally by populating a template and not just assembling HTML this way..
+		$("#results").append('<div class="resultItem"><h3>Panel '+v.id+'</h3><p>'+v.desc+'</p><ul>'+links+'</ul></div>');
+	});
+}
 
 
 $(document).ready(function(){
