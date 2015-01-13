@@ -7,25 +7,31 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--<script src="js/validate.js"></script>-->
     <script src="js/validate-new.js"></script>
+    <style>
+    	.error{ display:none;}
+    </style>
 </head>
 <body>
 	<h1>JavaScript test</h1>
 	<form id="testForm">
-		<div>
+		<div class="question" data-validation-type="alphanumeric">
 			<label for="text">text input:</label>
 			<input type="text" id="text" name="text" />
+			<span class="error">You must only enter alpha, numeric, or whitespace characters.</span>
 		</div>
-		<div>
+		<div class="question" data-validation-type="checkbox">
 			<label for="checkbox">checkbox input:</label>
 			<input type="checkbox" id="checkbox" name="checkbox" />
+			<span class="error">You must tick this checkbox.</span>
 		</div>
-		<div>
+		<div class="question" data-validation-type="radio">
 			<label for="radio">radio input:</label>
 			<input type="radio" id="radio" name="radio" value="radio1" />
-			<input type="radio" name="radio" value="radio2" />
-			<input type="radio" name="radio" value="radio3" />
+			<input type="radio" id="radio1" name="radio" value="radio2" />
+			<input type="radio"  id="radio2" name="radio" value="radio3" />
+			<span class="error">You must select at least one radio button.</span>
 		</div>
-		<div>
+		<div class="question" data-validation-type="select">
 			<label for="select">select input:</label>
 			<select id="select" name="select">
 				<option value="">Please select</option>
@@ -34,6 +40,7 @@
 				<option value="option3">option3</option>
 				<option value="option4">option4</option>
 				<option value="option5">option5</option>
+			<span class="error">You must select an option from the dropdown.</span>
 			</select>
 		</div>
 		<div>
