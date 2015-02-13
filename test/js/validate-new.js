@@ -1,3 +1,5 @@
+'use strict';
+
 var Validator = function($form){
 	this.$form = $form;
 	
@@ -11,9 +13,13 @@ Validator.prototype = {
 		alphanumeric: function($textField){
 			var value = $textField.val(),
 				pattern = new RegExp(/[^a-zA-Z0-9\d\s]/g);
-			
+
+			//check the field is not empty
+			if(value.length === 0){
+				return false;
+			}
 			var invalidChars = pattern.test(value);
-			//this
+			//this is bad, I know but is there a better way?
 			return !invalidChars;
 		},
 		checkbox: function($checkbox){
@@ -30,8 +36,10 @@ Validator.prototype = {
 			return anyCheckBoxChecked;
 		},
 		select: function($select){
-			if($select.val().length == 0){
+			if($select.val().length === 0){
 				return false;
+			}else{
+				return true;
 			}
 		}
 	},
@@ -42,57 +50,130 @@ Validator.prototype = {
 
 	validate: function(){
 		var rules = this.rules,
-			formValid = true,
-			fieldsWithErrors = [];
+			fieldsWithErrors = new Object(),
+			allValid = true;
 
-		this.$questions.each(function(){
-			var $question = $(this),
+		this.$questions.each(function(i){
+			var	$question = $(this),
 				type = $question.data('validationType'),
 				$field = $question.find("input,select"),
 				$errorField = $question.find(".error"),
 				valid = rules[type]($field);
 
-			//could I move this into a separate function?
-			//how would I handle the setting of formValid?
-			if(!valid){
-				formValid = false;
-
-				//add field to array of errors to show
-				fieldsWithErrors.push($errorField);
-			}else{
+			if(valid){
 				//remove the error if already showing
 				$errorField.hide();
-				fieldsWithErrors.splice($errorField);
+			}else{
+				$errorField.show();
+				allValid = false;
 			}
 			
 		});
 
-		//console.log(fieldsWithErrors);
-
-		if(formValid){
-			//make ajax call
-		}else{
-			//check what fields are still invalid
-			//and show and hide error messages where needed
-			for (var i = 0; i < fieldsWithErrors.length; i++) {
-				fieldsWithErrors[i].show();
-			};
-		}
+		return allValid;
 	}
 
 };
+
+var DataPopulator = function($divToPopulate){
+	this.$divToPopulate = $divToPopulate;
+};
+
+DataPopulator.prototype = {
+
+	getMarkup: function(callback){
+		//get the markup template file
+		$.ajax({
+			type: "GET",
+			dataType: "html",
+			url: "../data/template.html"
+		})
+		.done(function(data){
+		 	callback(data);
+		})
+		.fail(function(){
+			alert("Sorry there was an error.");
+		});
+	},
+
+	makeRequest: function(){
+
+		var dataPopulator = this;
+
+		$.ajax({
+			type: "GET",
+			dataType: "json",
+			url: "../data/test.json"
+		})
+		.done(function(data){
+			//we get the div template
+			//console.log(dataPopulator.getMarkup());
+			dataPopulator.getMarkup(function(divTemplate){
+				dataPopulator.populateData(divTemplate, data.panels);
+			});
+
+		})
+		.fail(function(){
+			alert("Sorry there was an error.");
+		});
+	},
+
+	populateData: function(divTemplate, panels){
+		//save each item to populate
+		var titleFromTemplate,
+			descFromTemplate,
+			ulFromTemplate,
+			titleFromPanel,
+			descFromPanel,
+			populatedLinks,
+			divToPopulate = this.$divToPopulate;
+
+		//iterate through the array of panels
+		$.each(panels, function(k, v){ //this is the jQuery each
+
+			$(divToPopulate).append(divTemplate);
+
+			//select the item that corresponds to each of the previous items
+			titleFromTemplate =  $(divToPopulate).children().last("div").find(".title");
+			descFromTemplate =  $(divToPopulate).children().last("div").find(".desc");
+			ulFromTemplate =  $(divToPopulate).children().last("div").find(".links");
+
+			//save each item to populate
+			titleFromPanel = "Panel"+v.id;
+			descFromPanel = v.desc;
+			populatedLinks = '';
+
+			//iterate through the links and put them together into an <ul>
+			$.each(v.links, function(l, b){
+				populatedLinks += '<li><a href="'+b.url+'">'+b.title+'</a></li>';
+			});
+
+
+			$(titleFromTemplate).html(titleFromPanel);
+			$(descFromTemplate).html(descFromPanel);
+			$(ulFromTemplate).html(populatedLinks);
+
+		});
+	}
+
+};
+
+
 
 $(document).ready(function(){
 
 	var validator = new Validator($('#testForm'));
 
-
 	//where would it be the best place for this code? I could not decide
 	validator.$form.$submitBtn = validator.$form.find("input[type=submit]");
-
 	validator.$form.$submitBtn.click(function(e){
 		e.preventDefault();
-		validator.validate();
+		var isFormValid = validator.validate();
+
+		if(isFormValid === true){
+			var dataPopulator = new DataPopulator($("#results"));
+			dataPopulator.makeRequest();
+		}
 	})
 
 });
