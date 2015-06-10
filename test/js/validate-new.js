@@ -29,11 +29,6 @@ Validator.prototype = {
 			return anyCheckBoxChecked;
 		},
 		select: function($select){
-			/*if($select.val().length === 0){
-				return false;
-			}else{
-				return true;
-			}*/
 
 			return $select.val().length;
 		}
@@ -90,15 +85,9 @@ DataPopulator.prototype = {
 	},
 
 	populateData: function(template, panels){
-		//save each item to populate
-		//console.log(template);
-		console.log(panels);
 		Mustache.parse(template);
-		var rendered = Mustache.to_html(template, panels);
-		//this.$divToPopulate.html(rendered);
+		var rendered = Mustache.to_html(template, {panels:panels});
 		this.$divToPopulate.append(rendered);
-
-
 	}
 
 };
