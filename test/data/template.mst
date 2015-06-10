@@ -1,9 +1,11 @@
+{{#panels}}
 <div class="resultItem">
-	<h3 class="title">{{titleFromPanel}}</h3>
-	<p class="desc">{{descFromPanel}}</p>
+	<h3 class="title">{{title}}</h3>
+	<p class="desc">{{desc}}</p>
 	<ul class="links">
-		<li><a data-item="url" href=""></a></li>
-		<li><a data-item="url" href=""></a></li>
-		<li><a data-item="url" href=""></a></li>
+	{{#links}}
+		<li><a href="{{url}}">{{title}}</a></li>
+	{{/links}}
 	</ul>
 </div>
+{{/panels}}
