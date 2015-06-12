@@ -86,7 +86,7 @@ DataPopulator.prototype = {
 
 	populateData: function(template, panels){
 		Mustache.parse(template);
-		var rendered = Mustache.to_html(template, {panels:panels});
+		var rendered = Mustache.render(template, {panels:panels});
 		this.$divToPopulate.append(rendered);
 	}
 
