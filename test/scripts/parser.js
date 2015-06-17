@@ -11,7 +11,7 @@ define(['jquery'], function($){
 					console.log(module);
 					
 					require([module], function(something){
-						console.log(something);
+						console.log(something); //this is undefined, why?
 						//var module = new Module(param);
 					});
 				}
