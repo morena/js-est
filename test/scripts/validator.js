@@ -1,6 +1,15 @@
-define( function(){
+define('jquery','DataPopulator', function($,DataPopulator){
 
-	return{
+	//constructor
+	var Validator = function(form){
+
+		this.$form = $(form);
+
+		this.initialise();
+	}
+
+	//prototype
+	Validator.prototype = {
 
 		rules: {
 			alphanumeric: function($textField){
@@ -26,10 +35,24 @@ define( function(){
 				return $select.val().length;
 			}
 		},
+		
+		initialise: function(){
+			this.$questions = this.$form.find('div.question');
+			this.bindEvents();
+		},
 
-		initialise: function($form){
-			this.$form = $form;
-			this.$questions = $form.find('div.question');
+		bindEvents: function(){
+			this.$form.$submitBtn = this.$form.find("input[type=submit]");
+
+			this.$form.$submitBtn.click(function(e){
+				e.preventDefault();
+				var isFormValid = this.validate();
+
+				if(isFormValid === true){
+					var dataPopulator = new DataPopulator($('#results'));
+					dataPopulator.makeRequest();
+				}
+			});
 		},
 
 		validate: function(){
@@ -56,6 +79,13 @@ define( function(){
 
 			return allValid;
 		}
-
 	}
+
+	//returning the constructor
+
+	//we return Validator as a constructor, not an object and not a function 
+	//because we want to instantiate the object only when we need it 
+	//and call necessary functions when we need them
+	//we don't want to instantiate the object by default in each module
+	return Validator;
 })
