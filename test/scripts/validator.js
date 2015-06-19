@@ -1,4 +1,4 @@
-define('jquery','DataPopulator', function($,DataPopulator){
+define(['jquery','DataPopulator'], function($,DataPopulator){
 
 	//constructor
 	var Validator = function(form){
@@ -38,24 +38,21 @@ define('jquery','DataPopulator', function($,DataPopulator){
 		
 		initialise: function(){
 			this.$questions = this.$form.find('div.question');
+			this.$form.$submitBtn = this.$form.find("input[type=submit]");
 			this.bindEvents();
 		},
 
 		bindEvents: function(){
-			this.$form.$submitBtn = this.$form.find("input[type=submit]");
+
+			var self = this;
 
 			this.$form.$submitBtn.click(function(e){
 				e.preventDefault();
-				var isFormValid = this.validate();
-
-				if(isFormValid === true){
-					var dataPopulator = new DataPopulator($('#results'));
-					dataPopulator.makeRequest();
-				}
+				self.evaluateForm();
 			});
 		},
 
-		validate: function(){
+		validateForm: function(){
 			var rules = this.rules,
 				fieldsWithErrors = new Object(),
 				allValid = true;
@@ -78,7 +75,15 @@ define('jquery','DataPopulator', function($,DataPopulator){
 			});
 
 			return allValid;
-		}
+		},
+		evaluateForm: function(){
+			var isFormValid = this.validateForm();
+
+			if(isFormValid === true){
+				var dataPopulator = new DataPopulator($('#results'));
+				dataPopulator.makeRequest();
+			}
+		},
 	}
 
 	//returning the constructor

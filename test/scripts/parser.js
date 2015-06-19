@@ -7,12 +7,9 @@ define(['jquery'], function($){
 					$el = $(this);
 				if(module){
 					var param = $el.attr('data-hw-module-param');
-
-					console.log(module);
 					
-					require([module], function(something){
-						console.log(something); //this is undefined, why?
-						//var module = new Module(param);
+					require([module], function(Module){
+						var module = new Module(param);
 					});
 				}
 			});
