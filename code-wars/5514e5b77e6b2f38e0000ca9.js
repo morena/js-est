@@ -36,8 +36,6 @@ function upArray(arr){
    }
   
   for (var i = arr.length - 1; i >= 0; i--) {
-    //console.log(arr);
-    //console.log("current value is "+arr[i]);
 
     var isInt = isAnInt(arr[i]),
         breakCheck1 = false;
@@ -57,7 +55,6 @@ function upArray(arr){
       }else{
         arr[i-1]+=1;
       }
-      //console.log("now array is "+arr);
     }
   };
 
