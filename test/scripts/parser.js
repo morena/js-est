@@ -12,17 +12,19 @@ define(['jquery', 'registry'], function($, registry){
 					$el = $(this);
 
 				if(module){
-					var param = $el.attr('data-hw-module-param');
+					var params = $el.attr('data-hw-module-params');
+
+					var fnc = new Function('return {' + params + '}');
 					
 					require([module], function(Module){
-					console.log(Module);
-						var module = new Module($el, param);
+						var module = new Module($el, fnc);
 						registry.register($el, module);
 						count++;
 
 						if(count === total){
 							callback();
 						}
+
 					});
 						
 				}
