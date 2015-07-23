@@ -6,6 +6,9 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 		this.$form = $(form);
 
 		this.initialise();
+
+		var valid = true;
+		events.trigger('validate', valid);
 	}
 
 	//prototype
@@ -40,6 +43,18 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 			this.$questions = this.$form.find('div.question');
 			this.$form.$submitBtn = this.$form.find("input[type=submit]");
 			this.bindEvents();
+
+
+
+			events.on('validate', function(valid){
+				if(valid){
+					//make ajax request
+					console.log("yo");
+				}
+			});
+
+			//unbinding
+			events.off('validate');
 		},
 
 		bindEvents: function(){
