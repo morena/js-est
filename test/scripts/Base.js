@@ -1,5 +1,4 @@
-define([],function(){
-
+define([], function(){
 	var mixin = function(params, dest){
 		for(var attr in params){
 			// if what you're passing in is an object
@@ -27,16 +26,10 @@ define([],function(){
 		return newObj;
 	};
 
-	var Base = function($el, params){
-		this.initialise($el, params);
-	};
-
-	Base.prototype = {
+	var Base = compose({
 		initialise: function($el, params){
 			mixin(params, this);
 		}
-	}
-
+	});
 	return Base;
-
-});
+})

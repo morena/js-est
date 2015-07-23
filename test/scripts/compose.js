@@ -1,25 +1,46 @@
+/*Basic example of compose's usage
+var Super = compose({
+	methodA: function(){
+		console.log('methodA');
+	}
+});
+
+var Sub = compose(Super, {
+	hello: "hello",
+
+	initialise: function(){
+		this.methodA();
+		this.methodB();
+	},
+
+	methodB: function(){
+		console.log('methodB');
+	}
+});*/
+
 define([], function(){
 
-	compose = function(){
+	compose = function(Base, proto){
 
 		var Constructor = function(){
-
+			if(typeof this.initialise === 'function'){
+				this.initialise.apply(this, arguments);
+			}
 		};
 
-		//Constructor.prototype.constructor = arguments[0];
-		console.log(arguments[0]);
+		if(arguments.length < 2){
+			Constructor.prototype = Base;
+		}
+		else{
+			Constructor.prototype = Object.create(Base.prototype);
+			Constructor.prototype.constructor = Constructor;
 
-		for(something in arguments[0]){
-			Constructor.prototype[something] = arguments[0][something];
+			for(var key in proto){
+				Constructor.prototype[key] = proto[key];
+			}
 		}
 
-		console.log(Constructor);
-
-
 		return Constructor;
-
-		//child.prototype = Object.create(parent.prototype);
-		//child.prototype.constructor = child;
 	}
 
 	return compose;
