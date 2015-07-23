@@ -4,7 +4,6 @@ define([], function(){
 		registeredEvents: {},
 
 		trigger: function(eventName, params){
-			//this.registeredEvents.push(eventName);
 			if(this.registeredEvents[eventName]){
 				//console.log("event "+eventName+" has been registered");
 				return this.registeredEvents[eventName].fnc.apply(this, arguments);
