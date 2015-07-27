@@ -54,7 +54,8 @@ List.prototype = {
 	},
 
 	insertIfLarger: function(element){
-		var larger = false;
+		var larger = false,
+			breaking = false;
 
 		for (var i = 0; i < this.dataStore.length; i++) {
 			if(this.dataStore[i] < element){
@@ -62,7 +63,23 @@ List.prototype = {
 				break;
 			}
 		};
+
 		if(larger === true){
+			this.dataStore.push(element);
+		}
+
+	},
+
+	insertIfSmaller: function(element){
+		var smaller = false;
+
+		for (var i = 0; i < this.dataStore.length; i++) {
+			if(this.dataStore[i] > element){
+				smaller = true;
+				break;
+			}
+		};
+		if(smaller === true){
 			this.dataStore.push(element);
 		}
 
@@ -117,24 +134,24 @@ List.prototype = {
 }
 
 var list = new List();
-/*list.insert(0);
-list.insert(1);
+//list.insert(0);
+//list.insert(1);
 list.insert(2);
 list.insert(3);
 list.insert(4);
 document.write(list.dataStore+"<br />");
-list.insertIfLarger(2);
+list.insertIfSmaller(2);
 document.write(list.dataStore+"<br />");
-list.insertIfLarger(5);
-document.write(list.dataStore+"<br />");*/
+list.insertIfSmaller(1);
+document.write(list.dataStore+"<br />");
 
-list.insert("a");
+/*list.insert("a");
 list.insert("b");
 list.insert("c");
 list.insert("d");
 list.insert("e");
 document.write(list.dataStore+"<br />");
-list.insertIfLarger("a");
+list.insertIfSmaller("a");
 document.write(list.dataStore+"<br />");
-list.insertIfLarger("w");
-document.write(list.dataStore+"<br />");
+list.insertIfSmaller("w");
+document.write(list.dataStore+"<br />");*/
