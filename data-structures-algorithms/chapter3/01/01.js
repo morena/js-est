@@ -71,7 +71,7 @@ List.prototype = {
 	clear: function(){
 		delete this.dataStore;
 		this.dataStore = [];
-		this,listSize = this.pos = 0;
+		this.listSize = this.pos = 0;
 	},
 
 	contains: function(element){

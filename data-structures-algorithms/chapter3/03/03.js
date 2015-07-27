@@ -53,35 +53,19 @@ List.prototype = {
 		return false;
 	},
 
-	insertIfLarger: function(element){
-		var larger = false,
-			breaking = false;
+	displayByGender: function(gender){
+		var listByGender = [];
 
 		for (var i = 0; i < this.dataStore.length; i++) {
-			if(this.dataStore[i] < element){
-				larger = true;
-				break;
+			for(personData in this.dataStore[i]){
+				if(this.dataStore[i][personData] === gender){
+					//listByGender.push(this.dataStore[i]);
+					listByGender.push(this.dataStore[i].name);
+				}
 			}
-		};
-
-		if(larger === true){
-			this.dataStore.push(element);
 		}
 
-	},
-
-	insertIfSmaller: function(element){
-		var smaller = false;
-
-		for (var i = 0; i < this.dataStore.length; i++) {
-			if(this.dataStore[i] > element){
-				smaller = true;
-				break;
-			}
-		};
-		if(smaller === true){
-			this.dataStore.push(element);
-		}
+		return listByGender;
 
 	},
 
@@ -133,25 +117,40 @@ List.prototype = {
 	}
 }
 
-var list = new List();
-//list.insert(0);
-//list.insert(1);
-list.insert(2);
-list.insert(3);
-list.insert(4);
-document.write(list.dataStore+"<br />");
-list.insertIfSmaller(2);
-document.write(list.dataStore+"<br />");
-list.insertIfSmaller(1);
-document.write(list.dataStore+"<br />");
+var Person = function(name, gender){
+	this.initialise(name, gender);
+}
+Person.prototype = {
+	name: '',
+	gender: 'female',
 
-/*list.insert("a");
-list.insert("b");
-list.insert("c");
-list.insert("d");
-list.insert("e");
-document.write(list.dataStore+"<br />");
-list.insertIfSmaller("a");
-document.write(list.dataStore+"<br />");
-list.insertIfSmaller("w");
-document.write(list.dataStore+"<br />");*/
+	initialise:function(name, gender){
+		this.name = name;
+		this.gender = gender;
+	}
+}
+
+var list = new List();
+
+var person1 = new Person("Morena", "female");
+list.insert(person1);
+var person2 = new Person("Paul", "male");
+list.insert(person2);
+var person3 = new Person("Mike", "male");
+list.insert(person3);
+var person4 = new Person("Jo", "female");
+list.insert(person4);
+var person5 = new Person("Viviana", "female");
+list.insert(person5);
+var person6 = new Person("Kevin", "male");
+list.insert(person6);
+var person7 = new Person("Jon", "male");
+list.insert(person7);
+var person8 = new Person("Sophie", "female");
+list.insert(person8);
+var person9 = new Person("Verity", "female");
+list.insert(person9);
+var person10 = new Person("Gary", "male");
+list.insert(person10);
+
+document.write(list.displayByGender("female"));
