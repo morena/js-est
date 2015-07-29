@@ -3,12 +3,7 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 	//constructor
 	var Validator = function(form){
 
-		this.$form = $(form);
-
-		this.initialise();
-
-		var valid = true;
-		events.trigger('validate', valid);
+		this.initialise(form);
 	}
 
 	//prototype
@@ -39,22 +34,11 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 			}
 		},
 		
-		initialise: function(){
+		initialise: function(form){
+			this.$form = $(form);
 			this.$questions = this.$form.find('div.question');
 			this.$form.$submitBtn = this.$form.find("input[type=submit]");
 			this.bindEvents();
-
-
-
-			events.on('validate', function(valid){
-				if(valid){
-					//make ajax request
-					console.log("yo");
-				}
-			});
-
-			//unbinding
-			events.off('validate');
 		},
 
 		bindEvents: function(){
@@ -91,13 +75,19 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 
 			return allValid;
 		},
+
+		validationHandler: function(){
+			console.log("form has been validated yo!");
+		},
+		
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
 
-			if(isFormValid === true){
-				var dataPopulator = new DataPopulator($('#results'));
-				dataPopulator.makeRequest();
-			}
+			events.on('validate', this.validationHandler);
+
+			events.trigger('validate', isFormValid);
+
+			events.off('validate');
 		},
 	}
 

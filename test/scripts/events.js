@@ -3,23 +3,32 @@ define([], function(){
 	events = {
 		registeredEvents: {},
 
-		trigger: function(eventName, params){
-			if(this.registeredEvents[eventName]){
-				//console.log("event "+eventName+" has been registered");
-				return this.registeredEvents[eventName].fnc.apply(this, arguments);
-			}else{
-				//console.log("the event "+eventName+" has NOT been registered yet");
+		/* Handles the event */
+		on: function(eventName, callback){
+			if(!this.registeredEvents[eventName]){
+				this.registeredEvents[eventName] = [];
 			}
-			this.registeredEvents[eventName].apply(this, arguments);
+
+			this.registeredEvents[eventName].push(callback);
 		},
 
-		on: function(eventName, fnc){
-			this.registeredEvents[eventName] = {fnc:fnc};
+		/* Fires the event */
+		trigger: function(eventName){
+			var eventn = this.registeredEvents[eventName];
+			if(eventn){
+				var args = Array.prototype.slice.call(arguments, 1);
+				//console.log("event "+eventName+" has been registered");
+				for(var i = 0; i < eventn.length; i++){
+					eventn[i].apply(null, args);
+				}
+			}/*else{
+				console.log("the event "+eventName+" has NOT been registered yet");
+			}*/
 		},
 
 		off: function(eventName){
-			if(this.registeredEvents.eventName){
-				delete this.registeredEvents.eventName;
+			if(this.registeredEvents[eventName]){
+				delete this.registeredEvents[eventName];
 			}
 		}
 	};
