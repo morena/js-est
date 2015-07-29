@@ -1,14 +1,5 @@
-define(['jquery','DataPopulator'], function($,DataPopulator){
-
-	//constructor
-	var Validator = function(form){
-
-		this.initialise(form);
-	}
-
-	//prototype
-	Validator.prototype = {
-
+define(['jquery','DataPopulator', 'events'], function($,DataPopulator, events){
+	var Validator = compose(events, {
 		rules: {
 			alphanumeric: function($textField){
 
@@ -83,13 +74,15 @@ define(['jquery','DataPopulator'], function($,DataPopulator){
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
 
-			events.on('validate', this.validationHandler);
+			this.on('validate', this.validationHandler);
 
-			events.trigger('validate', isFormValid);
+			this.trigger('validate', isFormValid);
 
-			events.off('validate');
+			this.off('validate');
 		},
-	}
+	});
+
+	
 
 	//returning the constructor
 

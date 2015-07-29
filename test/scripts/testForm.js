@@ -6,6 +6,7 @@ define(['./Validator', './DataPopulator'],function(Validator, DataPopulator){
 			$($el).css('color', 'pink');
 		},
 
+		//custom validator handler!
 		validationHandler: function(){
 			var dataPopulator = new DataPopulator($('#results'));
 			dataPopulator.makeRequest();

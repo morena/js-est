@@ -1,7 +1,11 @@
 define([], function(){
 
-	events = {
+	var events = compose({
 		registeredEvents: {},
+
+		initialise: function(){
+
+		},
 
 		/* Handles the event */
 		on: function(eventName, callback){
@@ -31,7 +35,7 @@ define([], function(){
 				delete this.registeredEvents[eventName];
 			}
 		}
-	};
+	});
 
 	return events;
 });
