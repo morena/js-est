@@ -66,19 +66,11 @@ define(['jquery','DataPopulator', 'events'], function($,DataPopulator, events){
 
 			return allValid;
 		},
-
-		validationHandler: function(){
-			console.log("form has been validated yo!");
-		},
 		
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
 
-			this.on('validate', this.validationHandler);
-
 			this.trigger('validate', isFormValid);
-
-			this.off('validate');
 		},
 	});
 

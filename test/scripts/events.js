@@ -30,9 +30,12 @@ define([], function(){
 			}*/
 		},
 
-		off: function(eventName){
-			if(this.registeredEvents[eventName]){
-				delete this.registeredEvents[eventName];
+		off: function(eventName, callback){
+			var events = this.registeredEvents;
+			if(events[eventName][callback]){
+				delete events[eventName][callback];
+
+				console.log(events);
 			}
 		}
 	});
