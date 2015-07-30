@@ -29,60 +29,23 @@ List.prototype = {
 	listSize: 0,
 	pos: 0,
 	dataStore: [], //initializes an empty array to store list elements
+	rentedMovies: [],
 
 	append: function(element){
 		this.dataStore[this.listSize++] = element;
 	},
 
 	find: function(element){
-		for (var i = 0; i < this.dataStore.length; i++) {
-			if( this.dataStore[i] == element){
+		for(var i = 0; i <this.dataStore.length; i++){
+			if(this.dataStore[i] == element){
 				return i;
 			}
 		}
 		return -1;
 	},
 
-	remove: function(element){
-		var foundAt = this.find(element);
-
-		if(foundAt > -1){
-			this.dataStore.splice(foundAt, 1);
-			--this.listSize;
-			return true;
-		}
-		return false;
-	},
-
-	length: function(){
-		return this.listSize;
-	},
-
-	toString: function(){
-		return this.dataStore;
-	},
-
-	insert: function(element, after){
-		if(undefined == after){
-			this.dataStore.push(element);
-		}
-		var insertPos = this.find(after);
-		if(insertPos > -1){
-			this.dataStore.splice(insertPos+1, 0, element);
-			++this.listSize;
-			return true;
-		}
-		return false;
-	},
-
-	clear: function(){
-		delete this.dataStore;
-		this.dataStore = [];
-		this.listSize = this.pos = 0;
-	},
-
 	contains: function(element){
-		for (var i = 0; i < this.dataStore.length; ++i){
+		for(var i = 0; i <this.dataStore.length; i++){
 			if(this.dataStore[i] == element){
 				return true;
 			}
@@ -90,47 +53,51 @@ List.prototype = {
 		return false;
 	},
 
-	front: function(){
-		this.pos = 0;
+	remove: function(element){
+		var foundAt = this.find(element);
+		if(foundAt > -1){
+			this.dataStore.splice(foundAt,1);
+			--this.listSize;
+			return true;
+		}
+		return false;
 	},
 
-	end: function(){
-		this.pos = this.listSize-1;
-	},
-
-	prev: function(){
-		if(this.pos > 0){
-			--this.pos;
+	displayList: function(list){
+		if(!list){
+			list = this.dataStore;
+		}
+		for (var i = 0; i < list.length; i++){
+			document.write(list[i]+'<br />');
 		}
 	},
 
-	next: function(){
-		if(this.pos < this.listSize-1){
-			++this.pos
-		}
-	},
-
-	currPos: function(){
-		return this.pos;
-	},
-
-	moveTo: function(position){
-		this.pos = position;
-	},
-
-	getElement: function(){
-		return this.dataStore[this.pos];
-	},
-	displayList: function(){
-		for (this.front(); this.currPos() < this.length(); this.next()){
-			document.write(this.getElement());
+	checkout: function(name, movie, movieList, customerList){
+		if(movieList.contains(movie)){
+			var c = new Customer(name, movie);
+			customerList.append(c);
+			movieList.remove(movie);
+			this.rentedMovies.push(movie);
+			this.displayList(this.rentedMovies);
+		}else{
+			document.write(movie+ "is not available");
 		}
 	}
 }
 
-var list = new List();
-for(var i = 0; i < movies.length; i++){
-	list.append(movies[i]);
+var Customer = function(name,movie){
+	this.name = name;
+	this.movie = movie;
 }
-list.displayList();
-console.log(list.dataStore);
+
+var movielist = new List();
+for(var i = 0; i < movies.length; i++){
+	movielist.append(movies[i]);
+}
+document.write("Movie List<br />");
+movielist.displayList();
+var customers = new List();
+
+movielist.checkout("Jane", "The Godfather", movielist, customers);
+document.write("<br />Customer Rentals:<br />");
+customers.displayList();
