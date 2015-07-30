@@ -1,28 +1,47 @@
 define([], function(){
 
-	events = {
+	var events = compose({
 		registeredEvents: {},
 
-		trigger: function(eventName, params){
-			if(this.registeredEvents[eventName]){
+		initialise: function(){
+
+		},
+
+		/* Handles the event */
+		on: function(eventName, callback){
+			if(!this.registeredEvents[eventName]){
+				this.registeredEvents[eventName] = [];
+			}
+
+			this.registeredEvents[eventName].push(callback);
+		},
+
+		/* Fires the event */
+		trigger: function(eventName){
+			var eventn = this.registeredEvents[eventName];
+			if(eventn){
+				var args = Array.prototype.slice.call(arguments, 1);
 				//console.log("event "+eventName+" has been registered");
-				return this.registeredEvents[eventName].fnc.apply(this, arguments);
-			}else{
-				//console.log("the event "+eventName+" has NOT been registered yet");
-			}
-			this.registeredEvents[eventName].apply(this, arguments);
+				for(var i = 0; i < eventn.length; i++){
+					eventn[i].apply(null, args);
+				}
+			}/*else{
+				console.log("the event "+eventName+" has NOT been registered yet");
+			}*/
 		},
 
-		on: function(eventName, fnc){
-			this.registeredEvents[eventName] = {fnc:fnc};
-		},
-
-		off: function(eventName){
-			if(this.registeredEvents.eventName){
-				delete this.registeredEvents.eventName;
-			}
+		off: function(eventName, callback){
+			var events = this.registeredEvents;
+			console.log(events);
+			/*for(var i = 0; i < events[eventName].length-1; i-- ){
+				if(events[eventName][i] == callback){
+					console.log("same function");
+					//events = events[eventName].splice(i, 1);
+					//console.log(events);
+				}
+			}*/
 		}
-	};
+	});
 
 	return events;
 });
