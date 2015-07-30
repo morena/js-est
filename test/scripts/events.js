@@ -31,15 +31,12 @@ define([], function(){
 		},
 
 		off: function(eventName, callback){
-			var events = this.registeredEvents;
-			console.log(events);
-			/*for(var i = 0; i < events[eventName].length-1; i-- ){
-				if(events[eventName][i] == callback){
-					console.log("same function");
-					//events = events[eventName].splice(i, 1);
-					//console.log(events);
+			var registeredEvents = this.registeredEvents;
+			for(var i = registeredEvents[eventName].length-1; i >= 0; i-- ){
+				if(registeredEvents[eventName][i] == callback){
+					registeredEvents[eventName].splice(i, 1);
 				}
-			}*/
+			}
 		}
 	});
 
