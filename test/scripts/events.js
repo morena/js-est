@@ -32,11 +32,14 @@ define([], function(){
 
 		off: function(eventName, callback){
 			var events = this.registeredEvents;
-			if(events[eventName][callback]){
-				delete events[eventName][callback];
-
-				console.log(events);
-			}
+			console.log(events);
+			/*for(var i = 0; i < events[eventName].length-1; i-- ){
+				if(events[eventName][i] == callback){
+					console.log("same function");
+					//events = events[eventName].splice(i, 1);
+					//console.log(events);
+				}
+			}*/
 		}
 	});
 
