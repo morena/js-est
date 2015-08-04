@@ -1,21 +1,16 @@
 define([], function(){
-	var Property = function(){
-
-	};
-
-	Property.prototype = {
+	
+	var Property = compose({
 		size: 0,
 		numberOfRooms: 0,
 		numberofBedrooms: 0,
 		numberOfBathrooms: 0,
 		address: null,
-		sold: false,
-		rented: false,
-		forSale: false,
-		toRent: false,
+		typeOfSale: 'sale',
 		dateAdded: null,
-		title: null
-	};
+		title: null,
+		propertyType: null
+	});
 
 	return Property;
 });

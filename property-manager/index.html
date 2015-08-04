@@ -8,10 +8,10 @@
     <script data-main="scripts/app" src="scripts/lib/require.js"></script>
 </head>
 <body>
-	<form data-hw-module="validator">
+	<form data-hw-module="AddPropertyForm">
 		<div class="question" data-validation-type="alphanumeric">
 			<label for="title">Title:</label>
-			<input type="text" id="title" />
+			<input type="text" id="title" name="title" />
 			<span class="error">You must only enter alpha, numeric, or whitespace characters.</span>
 		</div>
 		<div class="question" data-validation-type="radio">
@@ -22,27 +22,27 @@
 		</div>
 		<div class="question" data-validation-type="alphanumeric">
 			<label for="address">Address:</label>
-			<textarea id="address"></textarea>
+			<textarea id="address" name="address"></textarea>
 			<span class="error">You must only enter alpha, numeric, or whitespace characters.</span>
 		</div>
 		<div class="question" data-validation-type="numeric">
 			<label for="size">Size of the property (in sqm):</label>
-			<input type="text" id="size" size="4" maxwidth="5" />
+			<input type="text" id="size" size="4" maxwidth="5" name="size" />
 			<span class="error">You must only enter numbers</span>
 		</div>
 		<div class="question" data-validation-type="numeric">
 			<label for="numberOfRooms">Number of rooms:</label>
-			<input type="text" id="numberOfRooms" size="2" maxwidth="3" />
+			<input type="text" id="numberOfRooms" size="2" maxwidth="3" name="numberOfRooms" />
 			<span class="error">You must only enter numbers</span>
 		</div>
 		<div class="question" data-validation-type="numeric">
 			<label for="numberofBedrooms">Number of bedrooms:</label>
-			<input type="text" id="numberofBedrooms" size="2" maxwidth="3" />
+			<input type="text" id="numberofBedrooms" size="2" maxwidth="3" name="numberofBedrooms"  />
 			<span class="error">You must only enter numbers</span>
 		</div>
 		<div class="question" data-validation-type="numeric">
 			<label for="numberOfBathrooms">Number of bathrooms:</label>
-			<input type="text" id="numberOfBathrooms" size="2" maxwidth="3" />
+			<input type="text" id="numberOfBathrooms" size="2" maxwidth="3" name="numberOfBathrooms" />
 			<span class="error">You must only enter numbers</span>
 		</div>
 		<div class="question" data-validation-type="radio">

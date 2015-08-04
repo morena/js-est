@@ -8,6 +8,8 @@ define(['jquery', 'events'], function($, events){
 			this.bindEvents();
 		},
 
+		formData: {},
+
 		rules: {
 			alphanumeric: function($textField){
 				return !!$textField.val().match(/^[a-z\d\s]+$/);
@@ -35,6 +37,10 @@ define(['jquery', 'events'], function($, events){
 			}
 		},
 
+		addToFormData: function(field, data){
+			this.formData[field] = data;
+		},
+
 		bindEvents: function(){
 
 			var self = this;
@@ -48,14 +54,19 @@ define(['jquery', 'events'], function($, events){
 		validateForm: function(){
 			var rules = this.rules,
 				fieldsWithErrors = new Object(),
-				allValid = true;
+				allValid = true,
+				validator = this;
 
 			this.$questions.each(function(i){
 				var	$question = $(this),
 					type = $question.data('validationType'),
 					$field = $question.find("input,select,textarea"),
 					$errorField = $question.find(".error"),
+					fieldName = $field.attr("name"),
+					value = $field.val(),
 					valid = rules[type]($field);
+
+					validator.addToFormData(fieldName, value);
 
 				if(valid){
 					//remove the error if already showing
@@ -73,7 +84,7 @@ define(['jquery', 'events'], function($, events){
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
 
-			this.trigger('validate', isFormValid);
+			this.trigger('validate', isFormValid, this.formData);
 		},
 	});
 

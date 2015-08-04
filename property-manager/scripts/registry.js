@@ -9,8 +9,11 @@ define([], function(){
 				id = 'data-hw-module-id-'+this.generateRandomID();
 				$el.attr("id",id);
 			}
-
-			cache[id] = instance;
+			if(cache[id]){
+				this.register($el, instance);
+			}else{
+				cache[id] = instance;
+			}
 
 		},
 
