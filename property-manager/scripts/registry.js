@@ -1,10 +1,8 @@
 define([], function(){
-
 	var cache = {};
 
 	return{
 		register: function($el, instance){
-			console.log($el);
 			var id = $el.attr("id");
 
 			if(undefined == id){
@@ -28,4 +26,4 @@ define([], function(){
 			return random;
 		}
 	}
-});
+})
