@@ -1,4 +1,4 @@
-define(['validator', 'propertyManager'], function(validator, propertyManager){
+define(['validator', 'propertyManager', 'mustache'], function(validator, propertyManager, Mustache){
 	
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
@@ -7,17 +7,40 @@ define(['validator', 'propertyManager'], function(validator, propertyManager){
 			this.on('validate', this.validationHandler);
 			
 			//this.off('validate', this.validationHandler);
+
+			this.populateForm();
 		},
 
 		//custom validator handler!
-		validationHandler: function(){
-			if(arguments){
-				var property = arguments[1],
-					PropertyManager = new propertyManager();
+		validationHandler: function(isValid, property){
+			PropertyManager = new propertyManager();
 
+			if(isValid === true){
 				PropertyManager.add(property);
+			}
 
-				console.log(PropertyManager.getProperties());
+			console.log(PropertyManager.getProperties());
+		},
+
+		getFieldTemplate: function(){
+			$.when($.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'}))
+			.done(function(template){
+				return template[0];
+			})
+			.fail(function(){
+				alert("Sorry there was an error.");
+			});
+		},
+
+		addField: function(field){
+			template = getFieldTemplate();
+			Mustache.parse(template);
+
+			for(key in this.formProperties){
+				var field = this.formProperties[key],
+					rendered = Mustache.render(template, {field:field});
+				
+				this.$divToPopulate.append(rendered);
 			}
 		}
 	});

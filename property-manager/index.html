@@ -9,8 +9,8 @@
 </head>
 <body>
 	<form data-hw-module="AddPropertyForm">
-		<div class="question" data-validation-type="alphanumeric">
-			<label for="title">Title:</label>
+		<!--<div class="question" data-validation-type="alphanumeric">
+			<label for="title">Listing Title:</label>
 			<input type="text" id="title" name="title" />
 			<span class="error">You must only enter alpha, numeric, or whitespace characters.</span>
 		</div>
@@ -18,6 +18,12 @@
 			<label for="propertyType">Type of Property:</label>
 			<input type="radio" name="propertyType" value="Flat">Flat</input>
 			<input type="radio" name="propertyType" value="House">House</input>
+			<span class="error">You must select at least one radio button.</span>
+		</div>
+		<div class="question" data-validation-type="radio">
+			<label for="saleType">Is the property for sale or to rent?</label>
+			<input type="radio" name="saleType" value="ForSale">For Sale</input>
+			<input type="radio" name="saleType" value="House">To Rent</input>
 			<span class="error">You must select at least one radio button.</span>
 		</div>
 		<div class="question" data-validation-type="alphanumeric">
@@ -45,12 +51,11 @@
 			<input type="text" id="numberOfBathrooms" size="2" maxwidth="3" name="numberOfBathrooms" />
 			<span class="error">You must only enter numbers</span>
 		</div>
-		<div class="question" data-validation-type="radio">
-			<label for="saleType">Is the property for sale or to rent?</label>
-			<input type="radio" name="saleType" value="ForSale">For Sale</input>
-			<input type="radio" name="saleType" value="House">To Rent</input>
-			<span class="error">You must select at least one radio button.</span>
-		</div>
+		<div class="question" data-validation-type="numeric">
+			<label for="gardenSize">Size of the garden (in sqm):</label>
+			<input type="text" id="gardenSize" size="4" maxwidth="5" name="gardenSize" />
+			<span class="error">You must only enter numbers</span>
+		</div>-->
 		<p>
 			<input type="submit" value="submit" />
 		</p>
