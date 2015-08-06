@@ -10,21 +10,8 @@
 	{{#radioField}}
 		{{#options}}
 			<input type="radio" name="{{name}}" value="{{optionName}}">{{optionName}}</input>
-			<input type="radio" name="{{name}}" value="{{optionName}}">{{optionName}}</input>
 		{{/options}}
 	{{/radioField}}
-	
-	<span class="error">You must only enter alpha, numeric, or whitespace characters.</span>
-</div>
-
-
-<div class="resultItem">
-	<h3 class="title">{{title}}</h3>
-	<p class="desc">{{desc}}</p>
-	<ul class="links">
-	{{#links}}
-		<li><a href="{{url}}">{{title}}</a></li>
-	{{/links}}
-	</ul>
+	<span class="error">{{error}}</span>
 </div>
 {{/field}}
