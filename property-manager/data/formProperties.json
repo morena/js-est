@@ -5,7 +5,9 @@
 			"textField": true, 
 			"validation": "alphanumeric", 
 			"label": "Listing Title", 
-			"error":"You must only enter alpha, numeric, or whitespace characters."
+			"error":"You must only enter alpha, numeric, or whitespace characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -14,7 +16,9 @@
 			"textareaField": "true", 
 			"validation": "alphanumeric", 
 			"label": "Property Address", 
-			"error":"You must only enter alpha, numeric, or whitespace characters."
+			"error":"You must only enter alpha, numeric, or whitespace characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -24,7 +28,9 @@
 			"validation": "radio", 
 			"options": [{"optionName": "For Sale"},{"optionName": "To Rent"}], 
 			"label": "Is the property for sale or to rent?", 
-			"error":"You must select at least one radio button."
+			"error":"You must select at least one radio button.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -33,7 +39,9 @@
 			"textField": true, 
 			"validation": "numeric", 
 			"label": "Number of bedrooms", 
-			"error":"You must only enter numeric characters."
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -42,7 +50,9 @@
 			"textField": true, 
 			"validation": "numeric", 
 			"label": "Number of rooms", 
-			"error":"You must only enter numeric characters."
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -51,7 +61,9 @@
 			"textField": true, 
 			"validation": "numeric", 
 			"label": "Number of bathrooms", 
-			"error":"You must only enter numeric characters."
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
@@ -60,25 +72,31 @@
 			"textField": true, 
 			"validation": "numeric", 
 			"label": "Size of the property (in sqm)", 
-			"error":"You must only enter numeric characters."
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": true
 		}
 	},
 	{
 		"numberOfFloors": 
 		{
-				"textField": true, 
-				"validation": "numeric", 
-				"label": "Number of floors", 
-				"error":"You must only enter numeric characters."
+			"textField": true, 
+			"validation": "numeric", 
+			"label": "Number of floors", 
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": false
 		}
 	},
 	{
 		"gardenSize":
 		{
-				"textField": true, 
-				"validation": "numeric", 
-				"label": "Size of the garden (in sqm)", 
-				"error":"You must only enter numeric characters."
+			"textField": true, 
+			"validation": "numeric", 
+			"label": "Size of the garden (in sqm)", 
+			"error":"You must only enter numeric characters.",
+			"house": true,
+			"flat": false
 		}
 	}
 ]

@@ -12,7 +12,7 @@ define(['jquery', 'events'], function($, events){
 
 		rules: {
 			alphanumeric: function($textField){
-				return !!$textField.val().match(/^[a-z\d\s]+$/);
+				return !!$textField.val().match(/[a-zA-Z\d\s]+$/);
 			},
 			numeric: function($textField){
 				return !!$textField.val().match(/^\d+$/);

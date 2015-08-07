@@ -13,10 +13,15 @@ define(["jquery"], function($){
 		formProperties:[],
 
 		initialise: function(){
-			/*this.getData(function(data){
-				this.formProperties = data;
+			this.setData();
+		},
+
+		setData: function(){
+			var self = this;
+			this.getData(function(data){
+				self.formProperties = data;
 			});
-			console.log("here");*/
+
 		},
 
 		getData: function(callback){
@@ -26,10 +31,13 @@ define(["jquery"], function($){
 				url: "../data/formProperties.json", 
 				dataType: 'text'
 			}).done(function(data) {
-			  //callback($.parseJSON(data));
-			  return $.parseJSON(data);
+				callback($.parseJSON(data));
+			}).fail(function(error){
+				console.log(error);
 			});
 		}
+
+
 	});
 
 	return Property;

@@ -3,6 +3,7 @@ define([], function(){
 	compose = function(Base, proto){
 
 		var Constructor = function(){
+
 			if(typeof this.initialise === 'function'){
 				this.initialise.apply(this, arguments);
 			}

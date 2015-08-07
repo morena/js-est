@@ -3,6 +3,7 @@ define(['validator', 'propertyManager', 'mustache', 'House'],
 	
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
+			var self = this;
 			//validator.prototype.initialise.apply(this, $el);
 
 			this.$divToPopulate = $(".formInner",$el);
@@ -10,6 +11,10 @@ define(['validator', 'propertyManager', 'mustache', 'House'],
 			this.on('validate', this.validationHandler);
 			
 			//this.off('validate', this.validationHandler);
+
+			$(".propertyType", $el).change(function(){
+				self.manageFields($(this)[0].value, $el);
+			})
 
 			this.populateForm($el);
 		},
@@ -30,44 +35,46 @@ define(['validator', 'propertyManager', 'mustache', 'House'],
 
 			$.when($.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'}))
 			.done(function(template){
-				var house = new House();
-
-				console.log(house);
-
-				console.log(house.getData());
-
-				var formProperties2 = house.formProperties,
+				var house = new House(),
 					allFormProperties = [];
-
-					console.log(formProperties2);
 
 				Mustache.parse(template);
 
-				for (var i = 0; i < formProperties2.length; i++) {
-					for(key in formProperties2[i]){
-						allFormProperties.push(formProperties2[i][key]);
-					}
-				};
+				house.getData(function(formProperties2){
 
-				allFormProperties = allFormProperties.reverse();
+					for (var i = 0; i < formProperties2.length; i++) {
+						for(key in formProperties2[i]){
+							allFormProperties.push(formProperties2[i][key]);
+						}
+					};
 
-				for (var i = 0; i < allFormProperties.length; i++) {
-					var field = allFormProperties[i],
-						rendered = Mustache.render(template, {field:field});
-					
-					self.$divToPopulate.prepend(rendered);	
-				};
+					allFormProperties = allFormProperties.reverse();
 
-				//running this again to pick up on new dom fields added dynamically
-				//probably not the best of ways...
-				validator.prototype.initialise.apply(self, $el);
+					for (var i = 0; i < allFormProperties.length; i++) {
+						var field = allFormProperties[i],
+							rendered = Mustache.render(template, {field:field});
+						
+						self.$divToPopulate.prepend(rendered);	
+					};
+
+					//running this again to pick up on new dom fields added dynamically
+					//probably not the best of ways...
+					validator.prototype.initialise.apply(self, $el);
+
+				});
 			})
 			.fail(function(){
 				alert("Sorry there was an error.");
 			});
+		},
 
-
-			
+		manageFields: function(value, $el){
+			//on toggling the value of the radio button for propertyType
+			if(value == 'flat'){
+				$("[data-flat]", $el).addClass("hidden");
+			}else{
+				$("[data-flat]", $el).removeClass("hidden");
+			}
 		}
 	});
 
