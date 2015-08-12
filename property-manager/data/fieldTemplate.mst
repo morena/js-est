@@ -1,6 +1,6 @@
 {{#field}}
 <div class="question" 
-	data-validation-type="{{validation}}" {{^flat}} data-flat="false"{{/flat}}>
+	data-validation-type="{{validation}}" {{^flat}} data-flat="false"{{/flat}} {{#validate}} data-validate="{{validate}}"{{/validate}}>
 	<label for="{{name}}">{{label}}:</label>
 	{{#textField}}
 	    <input type="text" id="{{name}}" name="{{name}}" />

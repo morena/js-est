@@ -1,10 +1,10 @@
-define(['validator', 'propertyManager', 'mustache', 'House'], 
-	function(validator, propertyManager, Mustache, House){
+define(['validator', 'propertyManager', 'mustache', 'House', "router"], 
+	function(validator, propertyManager, Mustache, House, router){
 	
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
 			var self = this;
-			//validator.prototype.initialise.apply(this, $el);
+			validator.prototype.initialise.apply(this, $el);
 
 			this.$divToPopulate = $(".formInner",$el);
 
@@ -20,12 +20,16 @@ define(['validator', 'propertyManager', 'mustache', 'House'],
 		},
 
 		//custom validator handler!
-		validationHandler: function(isValid, property){
+		validationHandler: function(isValid, self){
+			var property = self.formData;
+
 			PropertyManager = new propertyManager();
 
 			if(isValid === true){
+				router.clickManager('/add');
 				PropertyManager.add(property);
 				console.log(PropertyManager.getProperties());
+				console.log(this);
 			}
 
 		},
@@ -71,9 +75,10 @@ define(['validator', 'propertyManager', 'mustache', 'House'],
 		manageFields: function(value, $el){
 			//on toggling the value of the radio button for propertyType
 			if(value == 'flat'){
-				$("[data-flat]", $el).addClass("hidden");
+				$("[data-flat]", $el).addClass("hidden").attr("data-validate", false);
+
 			}else{
-				$("[data-flat]", $el).removeClass("hidden");
+				$("[data-flat]", $el).removeClass("hidden").attr("data-validate", false);
 			}
 		}
 	});

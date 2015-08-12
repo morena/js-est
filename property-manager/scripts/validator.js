@@ -45,7 +45,7 @@ define(['jquery', 'events'], function($, events){
 
 			var self = this;
 
-			this.$form.$submitBtn.click(function(e){
+			this.$form.submit(function(e){
 				e.preventDefault();
 				self.evaluateForm();
 			});
@@ -63,8 +63,17 @@ define(['jquery', 'events'], function($, events){
 					$field = $question.find("input,select,textarea"),
 					$errorField = $question.find(".error"),
 					fieldName = $field.attr("name"),
+					validate = $question.data("validate"),
 					value = $field.val(),
-					valid = rules[type]($field);
+					valid = false;
+
+					console.log(fieldName, type, validate);
+
+
+					if(validate === true){
+						valid = rules[type]($field);
+					}
+					console.log(valid);
 
 					validator.addToFormData(fieldName, value);
 
@@ -72,8 +81,10 @@ define(['jquery', 'events'], function($, events){
 					//remove the error if already showing
 					$errorField.hide();
 				}else{
-					$errorField.show();
-					allValid = false;
+					if(validate === true){
+						$errorField.show();
+						allValid = false;
+					}
 				}
 				
 			});
@@ -84,7 +95,7 @@ define(['jquery', 'events'], function($, events){
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
 
-			this.trigger('validate', isFormValid, this.formData);
+			this.trigger('validate', isFormValid, this);
 		},
 	});
 
