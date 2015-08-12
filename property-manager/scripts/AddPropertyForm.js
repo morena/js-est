@@ -4,7 +4,7 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
 			var self = this;
-			validator.prototype.initialise.apply(this, $el);
+			//validator.prototype.initialise.apply(this, $el);
 
 			this.$divToPopulate = $(".formInner",$el);
 
@@ -29,7 +29,6 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 				router.clickManager('/add');
 				PropertyManager.add(property);
 				console.log(PropertyManager.getProperties());
-				console.log(this);
 			}
 
 		},

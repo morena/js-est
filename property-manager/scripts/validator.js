@@ -67,14 +67,9 @@ define(['jquery', 'events'], function($, events){
 					value = $field.val(),
 					valid = false;
 
-					console.log(fieldName, type, validate);
-
-
 					if(validate === true){
 						valid = rules[type]($field);
 					}
-					console.log(valid);
-
 					validator.addToFormData(fieldName, value);
 
 				if(valid){

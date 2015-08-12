@@ -7,7 +7,6 @@ define([], function(){
 		properties: {},
 
 		add: function(property){
-			console.log("ciao");
 			var id = this.generateRandomID();
 			if(this.properties[id]){
 				this.add(property);
