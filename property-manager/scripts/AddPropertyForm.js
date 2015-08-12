@@ -30,6 +30,12 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 
 					PropertyManager.add(property);
 					PropertyManager.showProperty();
+
+					//if user navigates away
+					window.addEventListener('popstate', function(event){
+						console.log(event);
+						PropertyManager.removeProperty(property);
+					});
 				});
 			}
 

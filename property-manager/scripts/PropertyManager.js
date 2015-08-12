@@ -35,17 +35,12 @@ define(['jquery','mustache'], function($, Mustache){
 					property = this.properties[latestPropertyAddedId];
 			}
 
-			//console.log(latestPropertyAddedId);
-			//console.log(property);
-
 			$.when($.ajax({url: "../data/propertyTemplate.mst", dataType: 'text'}))
 				.done(function(template){
 					
 					Mustache.parse(template);
 					
 					rendered = Mustache.render(template, {property:property});
-
-					console.log(self.divForList);
 					
 					$(self.divForList).prepend(rendered);	
 					
@@ -53,6 +48,25 @@ define(['jquery','mustache'], function($, Mustache){
 				.fail(function(){
 					alert("Sorry there was an error.");
 			});
+
+		},
+
+
+		removeProperty: function(propertyId){
+			var self = this;
+
+			if(!undefined === property){
+				var property = this.properties[propertyId];
+			}else{
+				var latestPropertyAddedId = this.latestPropertyAddedId;
+			}
+
+			delete this.properties[latestPropertyAddedId];
+
+			console.log(this.properties);
+
+
+			$(self.divForList).html("");
 
 		},
 
