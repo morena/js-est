@@ -26,9 +26,11 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 			PropertyManager = new propertyManager();
 
 			if(isValid === true){
-				router.clickManager('/add');
-				PropertyManager.add(property);
-				console.log(PropertyManager.getProperties());
+				router.clickManager('/add', function(){
+
+					PropertyManager.add(property);
+					PropertyManager.showProperty();
+				});
 			}
 
 		},
