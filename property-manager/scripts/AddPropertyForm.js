@@ -97,10 +97,13 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 		manageNavLinks: function(){
 			$("nav ul li a").each(function(){
 				$(this)[0].addEventListener("click", function (event) {
-					event.preventDefault;
-					var url = $(this).attr("href");
+					event.preventDefault();
+					var url = $(this).attr("href"),
+						module = $(this).data('hw-router-module');
 
-					router.clickManager(url);
+					console.log(module);
+
+					router.clickManager(url, module);
 				})
 			})
 		}

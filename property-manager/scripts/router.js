@@ -8,12 +8,19 @@ define(["jquery"], function($){
 
 		clickManager: function(link, stateData, callback){
 			if(supports_history_api() === true){
+
 				history.pushState(stateData, null, link);
+
+				//this never gets fired up
+				window.onpopstate = function(event){
+					console.log(document.location);
+				}
+
 				if(typeof callback === 'function'){
+
 					callback();
-					window.onpopstate = function(event){
-						console.log(document.location);
-					}
+				}else{
+					//var module = 
 				}
 			}
 		}
