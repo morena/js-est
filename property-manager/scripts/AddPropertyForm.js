@@ -19,19 +19,19 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 			this.populateForm($el);
 
 			this.manageNavLinks();
+
+			this.PropertyManager = new propertyManager();
 		},
 
 		//custom validator handler!
 		validationHandler: function(isValid, self){
 			var property = self.formData;
 
-			PropertyManager = new propertyManager();
-
 			if(isValid === true){
 				router.clickManager('/add', property, function(){
 
-					PropertyManager.add(property);
-					PropertyManager.showProperty();
+					self.PropertyManager.add(property);
+					self.PropertyManager.showProperty();
 
 				});
 
@@ -40,7 +40,7 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 					var state = event.state;
 					console.log(state);
 					console.log(history);
-					PropertyManager.removeProperty(property);
+					this.PropertyManager.removeProperty(property);
 				});*/
 			}
 
@@ -95,15 +95,17 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 		},
 
 		manageNavLinks: function(){
+			var self = this;
+
 			$("nav ul li a").each(function(){
 				$(this)[0].addEventListener("click", function (event) {
 					event.preventDefault();
-					var url = $(this).attr("href"),
-						module = $(this).data('hw-router-module');
+					var url = $(this).attr("href");
 
-					console.log(module);
+					router.clickManager("/"+url, null, function(){
 
-					router.clickManager(url, module);
+						self.PropertyManager[url]();
+					});
 				})
 			})
 		}

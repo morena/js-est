@@ -1,5 +1,5 @@
 {{#property}}
-<h2>Property details</h2>
+<h3>Property details</h3>
 {{#title}}
 <p><strong>Title</strong>: {{title}}</p>
 {{/title}}

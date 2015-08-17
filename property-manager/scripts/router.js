@@ -19,8 +19,6 @@ define(["jquery"], function($){
 				if(typeof callback === 'function'){
 
 					callback();
-				}else{
-					//var module = 
 				}
 			}
 		}

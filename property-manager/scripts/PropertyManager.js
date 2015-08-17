@@ -27,23 +27,26 @@ define(['jquery','mustache'], function($, Mustache){
 			return this.properties;
 		},
 
-		getPropertiesList: function(){
+		viewAllProperties: function(){
+			self = this;
 			$.when($.ajax({url: "../data/propertyTemplate.mst", dataType: 'text'}))
-				.done(function(template){
-					
-					Mustache.parse(template);
+			.done(function(template){
+				
+				Mustache.parse(template);
 
-					for( var key in this.properties){
-						var property = this.properties[key];
-						rendered = Mustache.render(template, {property:property});
-						
-						$(self.divForList).prepend(rendered);
-					}
-						
+				$(self.divForList).prepend('<h2>List of all properties added</h2>');
+
+				for( var key in self.properties){
+					var property = self.properties[key];
+					rendered = Mustache.render(template, {property:property});
 					
-				})
-				.fail(function(){
-					alert("Sorry there was an error.");
+					$(self.divForList).prepend(rendered);
+				}
+					
+				
+			})
+			.fail(function(){
+				alert("Sorry there was an error.");
 			});
 		},
 
@@ -61,7 +64,9 @@ define(['jquery','mustache'], function($, Mustache){
 				.done(function(template){
 					
 					Mustache.parse(template);
-					
+
+					$(self.divForSingle).prepend('<h2>Latest property added</h2>');
+
 					rendered = Mustache.render(template, {property:property});
 					
 					$(self.divForSingle).prepend(rendered);	
