@@ -6,11 +6,14 @@ define(["jquery"], function($){
 
 	router = {
 
-		clickManager: function(link, callback, popStateCallback){
+		clickManager: function(link, stateData, callback){
 			if(supports_history_api() === true){
-				history.pushState(null, null, link);
+				history.pushState(stateData, null, link);
 				if(typeof callback === 'function'){
 					callback();
+					window.onpopstate = function(event){
+						console.log(document.location);
+					}
 				}
 			}
 		}

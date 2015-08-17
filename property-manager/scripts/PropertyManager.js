@@ -6,7 +6,9 @@ define(['jquery','mustache'], function($, Mustache){
 	PropertyManager.prototype = {
 		properties: {},
 
-		divForList: $('#propertySingle'),
+		divForSingle: $('#propertySingle'),
+
+		divForList: $('#propertyList'),
 
 		latestPropertyAddedId: 0,
 
@@ -25,14 +27,34 @@ define(['jquery','mustache'], function($, Mustache){
 			return this.properties;
 		},
 
+		getPropertiesList: function(){
+			$.when($.ajax({url: "../data/propertyTemplate.mst", dataType: 'text'}))
+				.done(function(template){
+					
+					Mustache.parse(template);
+
+					for( var key in this.properties){
+						var property = this.properties[key];
+						rendered = Mustache.render(template, {property:property});
+						
+						$(self.divForList).prepend(rendered);
+					}
+						
+					
+				})
+				.fail(function(){
+					alert("Sorry there was an error.");
+			});
+		},
+
 		showProperty: function(propertyId){
 			var self = this;
 
-			if(!undefined === property){
-				var property = this.properties[propertyId];
-			}else{
+			if(undefined === propertyId){
 				var latestPropertyAddedId = this.latestPropertyAddedId,
 					property = this.properties[latestPropertyAddedId];
+			}else{
+				var property = this.properties[propertyId];
 			}
 
 			$.when($.ajax({url: "../data/propertyTemplate.mst", dataType: 'text'}))
@@ -42,7 +64,7 @@ define(['jquery','mustache'], function($, Mustache){
 					
 					rendered = Mustache.render(template, {property:property});
 					
-					$(self.divForList).prepend(rendered);	
+					$(self.divForSingle).prepend(rendered);	
 					
 				})
 				.fail(function(){
@@ -66,7 +88,7 @@ define(['jquery','mustache'], function($, Mustache){
 			console.log(this.properties);
 
 
-			$(self.divForList).html("");
+			$(self.divForSingle).html("");
 
 		},
 

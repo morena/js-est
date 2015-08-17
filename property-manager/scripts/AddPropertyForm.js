@@ -1,5 +1,5 @@
-define(['validator', 'propertyManager', 'mustache', 'House', "router"], 
-	function(validator, propertyManager, Mustache, House, router){
+define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"], 
+	function(validator, propertyManager, Mustache, House, router, $){
 	
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
@@ -17,6 +17,8 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 			})
 
 			this.populateForm($el);
+
+			this.manageNavLinks();
 		},
 
 		//custom validator handler!
@@ -26,17 +28,20 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 			PropertyManager = new propertyManager();
 
 			if(isValid === true){
-				router.clickManager('/add', function(){
+				router.clickManager('/add', property, function(){
 
 					PropertyManager.add(property);
 					PropertyManager.showProperty();
 
-					//if user navigates away
-					window.addEventListener('popstate', function(event){
-						console.log(event);
-						PropertyManager.removeProperty(property);
-					});
 				});
+
+				/*//if user navigates away
+				window.addEventListener('popstate', function(event){
+					var state = event.state;
+					console.log(state);
+					console.log(history);
+					PropertyManager.removeProperty(property);
+				});*/
 			}
 
 		},
@@ -87,6 +92,17 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router"],
 			}else{
 				$("[data-flat]", $el).removeClass("hidden").attr("data-validate", false);
 			}
+		},
+
+		manageNavLinks: function(){
+			$("nav ul li a").each(function(){
+				$(this)[0].addEventListener("click", function (event) {
+					event.preventDefault;
+					var url = $(this).attr("href");
+
+					router.clickManager(url);
+				})
+			})
 		}
 	});
 
