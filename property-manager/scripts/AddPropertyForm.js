@@ -28,12 +28,14 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 			var property = self.formData;
 
 			if(isValid === true){
-				router.clickManager('/add', property, function(){
+				/*router.clickManager('/add', property, function(){
 
 					self.PropertyManager.add(property);
 					self.PropertyManager.showProperty();
 
-				});
+				});*/
+
+				router.navigate('/add');
 
 				/*//if user navigates away
 				window.addEventListener('popstate', function(event){
@@ -102,10 +104,12 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 					event.preventDefault();
 					var url = $(this).attr("href");
 
-					router.clickManager("/"+url, null, function(){
+					/*router.clickManager("/"+url, null, function(){
 
 						self.PropertyManager[url]();
-					});
+					});*/
+
+					router.navigate(url);
 				})
 			})
 		}
