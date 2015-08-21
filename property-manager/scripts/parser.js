@@ -29,6 +29,24 @@ define(['jquery', 'registry'], function($, registry){
 				}
 
 			});
+		},
+
+		parseEl: function($el){
+			var module = $($el).attr('data-hw-module');
+
+			console.log($el);
+
+			if(module){
+
+				var params = $el.attr('data-hw-module-params'),
+					fnc = new Function('return {' + params + '}');
+
+				require([module], function(Module){
+
+					var module = new Module($el, fnc);
+					registry.register($el, module);
+				});
+			}
 		}
 	}
 });

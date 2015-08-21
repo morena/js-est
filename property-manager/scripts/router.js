@@ -31,6 +31,8 @@ define(["jquery"], function($){
 		_routeChangeHandler: function(){
 			var url = window.location.pathname;
 
+			console.log(url);
+
 			for(var i=0; i<this._routes.length; i++){
 				if(url === this._routes[i].route){
 					this._routes[i].callback();

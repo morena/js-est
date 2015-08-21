@@ -1,26 +1,24 @@
-define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"], 
-	function(validator, propertyManager, Mustache, House, router, $){
+define(['validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"], 
+	function(validator, PropertyManager, Mustache, House, router, $){
 	
 	var AddPropertyForm = compose(validator, {
 		initialise: function($el){
 			var self = this;
+			
+			this.$el = $el;
 			//validator.prototype.initialise.apply(this, $el);
 
-			this.$divToPopulate = $(".formInner",$el);
+			self.$formWrapper = $(".formContent",$el);
 
 			this.on('validate', this.validationHandler);
 			
-			//this.off('validate', this.validationHandler);
-
 			$(".propertyType", $el).change(function(){
 				self.manageFields($(this)[0].value, $el);
 			})
 
-			this.populateForm($el);
+			//this.populateForm($el);
 
 			this.manageNavLinks();
-
-			this.PropertyManager = new propertyManager();
 		},
 
 		//custom validator handler!
@@ -35,26 +33,21 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 
 				});*/
 
-				router.navigate('/add');
-
-				/*//if user navigates away
-				window.addEventListener('popstate', function(event){
-					var state = event.state;
-					console.log(state);
-					console.log(history);
-					this.PropertyManager.removeProperty(property);
-				});*/
+				router.navigate('add');
 			}
 
 		},
 
-		populateForm: function($el){
-			var self = this;
+		populateForm: function(){
+			var self = this
+				$el = this.$el;
 
 			$.when($.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'}))
 			.done(function(template){
 				var house = new House(),
 					allFormProperties = [];
+				
+				self.$divToPopulate = $(".formInner",$el);
 
 				Mustache.parse(template);
 
@@ -103,11 +96,6 @@ define(['validator', 'propertyManager', 'mustache', 'House', "router", "jquery"]
 				$(this)[0].addEventListener("click", function (event) {
 					event.preventDefault();
 					var url = $(this).attr("href");
-
-					/*router.clickManager("/"+url, null, function(){
-
-						self.PropertyManager[url]();
-					});*/
 
 					router.navigate(url);
 				})

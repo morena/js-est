@@ -1,9 +1,5 @@
 define(['jquery','mustache'], function($, Mustache){
-	var PropertyManager = function(){
-
-	};
-
-	PropertyManager.prototype = {
+	var PropertyManager = {
 		properties: {},
 
 		divForSingle: $('#propertySingle'),

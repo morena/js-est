@@ -11,7 +11,7 @@
 	<h1>Morena's properties</h1>
 	<nav>
 		<ul>
-			<li><a href="/">Add a property</a></li>
+			<li><a href="/add">Add a property</a></li>
 			<li><a href="viewAllProperties">View all properties</a></li>
 		</ul>
 	</nav>
@@ -21,19 +21,9 @@
 	<div class="propertySingle" id="propertySingle">
 		
 	</div>
-	<h2>Add a property</h2>
-	<form data-hw-module="AddPropertyForm">
-		<div class="question" data-validation-type="radio" data-validate="true">
-			<label for="propertyType">Type of property:</label>
-			<input type="radio" id="1" class="propertyType" name="propertyType" value="flat">Flat</input>
-			<input type="radio" id="2" class="propertyType" name="propertyType" value="house">House</input>
-			<span class="error">You must select at least one radio button.</span>
-		</div>
 
-		<div class="formInner"></div>
-		<p>
-			<input type="submit" value="submit" />
-		</p>
+	<form data-hw-module="AddPropertyForm" class="formWrapper">
+		<div class="formContent"></div>
 	</form>
 </body>
 </html>
