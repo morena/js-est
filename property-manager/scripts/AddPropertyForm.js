@@ -1,45 +1,37 @@
-define(['validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"], 
-	function(validator, PropertyManager, Mustache, House, router, $){
+define(['Validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"], 
+	function(Validator, PropertyManager, Mustache, House, router, $){
 	
-	var AddPropertyForm = compose(validator, {
+	var AddPropertyForm = compose(Validator, {
+		
+		$divToPopulate: null,
+
 		initialise: function($el){
 			var self = this;
 			
 			this.$el = $el;
-			//validator.prototype.initialise.apply(this, $el);
+			//Validator.prototype.initialise.apply(this, $el);
 
-			self.$formWrapper = $(".formContent",$el);
+			this.populateForm($el);
 
-			this.on('validate', this.validationHandler);
-			
-			$(".propertyType", $el).change(function(){
-				self.manageFields($(this)[0].value, $el);
-			})
+			self.on('validate', self.validationHandler);
 
-			//this.populateForm($el);
-
-			this.manageNavLinks();
+			self.postRender();
 		},
 
-		//custom validator handler!
+		//custom Validator handler!
 		validationHandler: function(isValid, self){
 			var property = self.formData;
 
 			if(isValid === true){
-				/*router.clickManager('/add', property, function(){
+				PropertyManager.add(property);
 
-					self.PropertyManager.add(property);
-					self.PropertyManager.showProperty();
-
-				});*/
-
-				router.navigate('add');
+				router.navigate('added');
 			}
 
 		},
 
 		populateForm: function(){
-			var self = this
+			var self = this,
 				$el = this.$el;
 
 			$.when($.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'}))
@@ -70,7 +62,8 @@ define(['validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"]
 
 					//running this again to pick up on new dom fields added dynamically
 					//probably not the best of ways...
-					validator.prototype.initialise.apply(self, $el);
+					//Validator.prototype.initialise.apply(self, $el);
+					self.postRender();
 
 				});
 			})
@@ -83,23 +76,24 @@ define(['validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"]
 			//on toggling the value of the radio button for propertyType
 			if(value == 'flat'){
 				$("[data-flat]", $el).addClass("hidden").attr("data-validate", false);
-
 			}else{
 				$("[data-flat]", $el).removeClass("hidden").attr("data-validate", false);
 			}
 		},
 
-		manageNavLinks: function(){
-			var self = this;
+		postRender: function(){
+			var self = this,
+				validator = new Validator();
+			$el = this.$el;
 
-			$("nav ul li a").each(function(){
-				$(this)[0].addEventListener("click", function (event) {
-					event.preventDefault();
-					var url = $(this).attr("href");
+			validator.postRender($el);
 
-					router.navigate(url);
-				})
-			})
+			self.$formWrapper = $(".formContent",$el);
+			
+			$(".propertyType", $el).change(function(){
+				self.manageFields($(this)[0].value, $el);
+			});
+
 		}
 	});
 

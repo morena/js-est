@@ -1,17 +1,29 @@
 'use strict';
-define(['parser', 'registry', 'router','form'], function(parser, registry, router, form){
-	
+define(['jquery', 'parser', 'registry', 'router','form', 'PropertyManager'], 
+	function($, parser, registry, router, form, PropertyManager){
+
+	var view = $('#viewContainer');
+
 	parser.parse(function(){
 		//any custom JS to run on registry's items
-
 	});
 
 	router.route('/add', function(){
 		//show the add view
-		//console.log(AddPropertyForm);
-		form.populateForm();
-		console.log(form.$el);
-		parser.parseEl(form.$el);
+		form.populateForm().then(function(){
+			parser.parse(null, view);
+		});
+	});
+
+	router.route('/added', function(){
+		//confirm property has been added and display it
+		PropertyManager.showProperty();
+	});
+
+
+	router.route('/viewAllProperties', function(){
+		//show all the properties added so far
+		PropertyManager.viewAllProperties();
 	});
 
 	router.start();

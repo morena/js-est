@@ -6,10 +6,12 @@ h1 {
 	padding:0 0 20px;
 }
 h2 {
-	padding:40px 0 20px;
+	padding:10px 0;
+	font-size:1.4em;
 }
 h3 {
-	padding:40px 0 10px;
+	padding:10px 0;
+	font-size:1.2em;
 }
 form div {
 	padding:0 0 20px;

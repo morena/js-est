@@ -1,8 +1,10 @@
 define(['jquery', 'registry'], function($, registry){
 	return {
-		parse: function(callback){
+		parse: function(callback, $el){
 
-			var collection = $("[data-hw-module]"),
+			$el = $el || $(document.body);
+
+			var collection = $el.find("[data-hw-module]"),
 				count = 0,
 				total = collection.length;
 			
@@ -23,30 +25,14 @@ define(['jquery', 'registry'], function($, registry){
 						count++;
 
 						if(count === total){
-							callback();
+							if(typeof callback === 'function'){
+								callback();
+							}
 						}
 					});
 				}
 
 			});
-		},
-
-		parseEl: function($el){
-			var module = $($el).attr('data-hw-module');
-
-			console.log($el);
-
-			if(module){
-
-				var params = $el.attr('data-hw-module-params'),
-					fnc = new Function('return {' + params + '}');
-
-				require([module], function(Module){
-
-					var module = new Module($el, fnc);
-					registry.register($el, module);
-				});
-			}
 		}
 	}
 });

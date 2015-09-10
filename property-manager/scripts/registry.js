@@ -3,14 +3,25 @@ define([], function(){
 
 	return{
 		register: function($el, instance){
+
 			var id = $el.attr("id");
 
 			if(undefined == id){
 				id = 'data-hw-module-id-'+this.generateRandomID();
 				$el.attr("id",id);
 			}
+
+			if(cache[id] && window.console && window.console.warn){
+				console.warn('id: ' + id + ' already exists in Registry and will be overwritten');
+			}
+			
+			//disabling this as it causes an error when trying to parse a module again after the first itme
+			//when visiting other URLS like /add etc
+			//if(cache[id]){
+			//console.log(cache);
+			//console.log(cache[id]);
 			if(cache[id]){
-				this.register($el, instance);
+				//this.register($el, instance);
 			}else{
 				cache[id] = instance;
 			}

@@ -2,10 +2,7 @@ define(['jquery', 'events'], function($, events){
 	var Validator = compose(events, {
 		
 		initialise: function(form){
-			this.$form = $(form);
-			this.$questions = this.$form.find('div.question');
-			this.$form.$submitBtn = this.$form.find("input[type=submit]");
-			this.bindEvents();
+			this.postRender(form);
 		},
 
 		formData: {},
@@ -67,6 +64,7 @@ define(['jquery', 'events'], function($, events){
 					value = $field.val(),
 					valid = false;
 
+
 					if(validate === true){
 						valid = rules[type]($field);
 					}
@@ -80,8 +78,7 @@ define(['jquery', 'events'], function($, events){
 						$errorField.show();
 						allValid = false;
 					}
-				}
-				
+				}				
 			});
 
 			return allValid;
@@ -92,6 +89,13 @@ define(['jquery', 'events'], function($, events){
 
 			this.trigger('validate', isFormValid, this);
 		},
+
+		postRender: function(form){
+			this.$form = $(form);
+			this.$questions = this.$form.find('div.question');
+			this.$form.$submitBtn = this.$form.find("input[type=submit]");
+			this.bindEvents();
+		}
 	});
 
 	
