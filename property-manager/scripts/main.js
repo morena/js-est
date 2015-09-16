@@ -1,6 +1,6 @@
 'use strict';
-define(['jquery', 'utilities/parser', 'utilities/registry', 'utilities/router','widgets/form/form', 'models/PropertyManager'], 
-	function($, parser, registry, router, form, PropertyManager){
+define(['jquery', 'utilities/parser', 'utilities/registry', 'utilities/router','widgets/form/form', 'widgets/PropertyDisplayer'], 
+	function($, parser, registry, router, form, PropertyDisplayer){
 
 	var view = $('#viewContainer');
 
@@ -17,13 +17,13 @@ define(['jquery', 'utilities/parser', 'utilities/registry', 'utilities/router','
 
 	router.route('/added', function(){
 		//confirm property has been added and display it
-		PropertyManager.showProperty();
+		PropertyDisplayer.showProperty();
 	});
 
 
 	router.route('/viewAllProperties', function(){
 		//show all the properties added so far
-		PropertyManager.viewAllProperties();
+		PropertyDisplayer.viewAllProperties();
 	});
 
 	router.start();
