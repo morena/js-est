@@ -1,4 +1,4 @@
-define(['Validator', 'PropertyManager', 'mustache', 'House', "router", "jquery"], 
+define(['./validator', '../../models/PropertyManager', 'mustache', '../../models/House', "../../utilities/router", "jquery"], 
 	function(Validator, PropertyManager, Mustache, House, router, $){
 	
 	var AddPropertyForm = compose(Validator, {

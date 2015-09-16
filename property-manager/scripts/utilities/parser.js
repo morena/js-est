@@ -1,4 +1,4 @@
-define(['jquery', 'registry'], function($, registry){
+define(['jquery', './registry'], function($, registry){
 	return {
 		parse: function(callback, $el){
 

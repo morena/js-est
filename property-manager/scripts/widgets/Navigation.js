@@ -1,4 +1,4 @@
-define(['router', 'jquery'], 
+define(['../utilities/router', 'jquery'], 
 	function(router, $){
 	
 	var Navigation = compose({

@@ -1,4 +1,4 @@
-<form data-hw-module="AddPropertyForm" class="formWrapper">
+<form data-hw-module="widgets/form/AddPropertyForm" class="formWrapper">
 	<div class="formContent">
 		<div class="question" data-validation-type="radio" data-validate="true">
 			<label for="propertyType">Type of property:</label>

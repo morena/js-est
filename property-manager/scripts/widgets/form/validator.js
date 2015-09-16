@@ -1,4 +1,4 @@
-define(['jquery', 'events'], function($, events){
+define(['jquery', '../../utilities/events'], function($, events){
 	var Validator = compose(events, {
 		
 		initialise: function(form){

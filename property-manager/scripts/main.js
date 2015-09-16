@@ -1,5 +1,5 @@
 'use strict';
-define(['jquery', 'parser', 'registry', 'router','form', 'PropertyManager'], 
+define(['jquery', 'utilities/parser', 'utilities/registry', 'utilities/router','widgets/form/form', 'models/PropertyManager'], 
 	function($, parser, registry, router, form, PropertyManager){
 
 	var view = $('#viewContainer');
