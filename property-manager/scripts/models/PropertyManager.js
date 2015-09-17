@@ -5,6 +5,7 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 		latestPropertyAddedId: 0,
 
 		add: function(property){
+			//console.log(this.properties);
 			var id = randomNumber.generateRandomN();
 			if(this.properties[id]){
 				this.add(property);
@@ -13,6 +14,8 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 			}
 
 			this.latestPropertyAddedId = id;
+
+			//console.log(this.properties);
 		},
 
 		getProperties: function(){

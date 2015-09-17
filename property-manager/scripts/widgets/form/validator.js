@@ -41,8 +41,9 @@ define(['jquery', '../../utilities/events'], function($, events){
 		bindEvents: function(){
 
 			var self = this;
+			this.$form.off("submit");
 
-			this.$form.submit(function(e){
+			this.$form.on( "submit", function(e){
 				e.preventDefault();
 				self.evaluateForm();
 			});
@@ -86,7 +87,6 @@ define(['jquery', '../../utilities/events'], function($, events){
 		
 		evaluateForm: function(){
 			var isFormValid = this.validateForm();
-
 			this.trigger('validate', isFormValid, this);
 		},
 
