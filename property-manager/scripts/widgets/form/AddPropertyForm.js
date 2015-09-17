@@ -1,5 +1,10 @@
-define(['./validator', '../../models/PropertyManager', 'mustache', '../../models/House', "../../utilities/router", "jquery"], 
-	function(Validator, PropertyManager, Mustache, House, router, $){
+define(['./validator', 
+		'../../models/PropertyManager', 
+		'mustache', '../../models/House', 
+		"../../utilities/router", 
+		"jquery",
+		"../../utilities/randomNumber"], 
+	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber){
 	
 	var AddPropertyForm = compose(Validator, {
 		
@@ -102,7 +107,7 @@ define(['./validator', '../../models/PropertyManager', 'mustache', '../../models
 
 		autoPopulateForm: function(event){
 			var self = this,
-				randomID = PropertyManager.generateRandomID();
+				randomN = randomNumber.generateRandomN();
 			event.preventDefault();
 			$(self.$el.find(".question")).each(function(){
 				var $field = $(this).find("input[data-hw-default],select[data-hw-default],textarea[data-hw-default]"),
@@ -110,7 +115,7 @@ define(['./validator', '../../models/PropertyManager', 'mustache', '../../models
 					currentValue = $field.val();
 
 				if(currentValue == ""){
-					$field.val(defaultValue+randomID);
+					$field.val(defaultValue+randomN);
 				}else{
 					if(defaultValue === 'true'){
 						$field.attr("checked", "checked");

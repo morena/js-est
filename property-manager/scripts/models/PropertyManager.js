@@ -1,11 +1,11 @@
-define(['jquery','mustache'], function($, Mustache){
+define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache, randomNumber){
 	var PropertyManager = {
 		properties: {},
 
 		latestPropertyAddedId: 0,
 
 		add: function(property){
-			var id = this.generateRandomID();
+			var id = randomNumber.generateRandomN();
 			if(this.properties[id]){
 				this.add(property);
 			}else{
@@ -35,14 +35,6 @@ define(['jquery','mustache'], function($, Mustache){
 
 			$(self.divForSingle).html("");
 
-		},
-
-		generateRandomID: function(){
-			var min = 1,
-				max = 1000;
-				random = Math.floor(Math.random()* (max-min+1)) + min;
-
-			return random;
 		}
 	};
 
