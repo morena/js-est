@@ -94,7 +94,30 @@ define(['./validator', '../../models/PropertyManager', 'mustache', '../../models
 				self.manageFields($(this)[0].value, $el);
 			});
 
-		}
+			$('.auotPopulateForm').on("click", function(event){
+				self.autoPopulateForm(event);
+			});
+
+		},
+
+		autoPopulateForm: function(event){
+			var self = this,
+				randomID = PropertyManager.generateRandomID();
+			event.preventDefault();
+			$(self.$el.find(".question")).each(function(){
+				var $field = $(this).find("input[data-hw-default],select[data-hw-default],textarea[data-hw-default]"),
+					defaultValue = $field.attr("data-hw-default"),
+					currentValue = $field.val();
+
+				if(currentValue == ""){
+					$field.val(defaultValue+randomID);
+				}else{
+					if(defaultValue === 'true'){
+						$field.attr("checked", "checked");
+					}
+				}
+			});
+		},
 	});
 
 	return AddPropertyForm;

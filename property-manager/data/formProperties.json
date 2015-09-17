@@ -9,7 +9,8 @@
 			"error":"You must only enter alpha, numeric, or whitespace characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "Sample Title"
 		}
 	},
 	{
@@ -22,7 +23,8 @@
 			"error":"You must only enter alpha, numeric, or whitespace characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "Sample Address"
 		}
 	},
 	{
@@ -31,7 +33,7 @@
 			"radioField": "true", 
 			"validation": "radio", 
 			"name": "typeOfSale",
-			"options": [{"optionName": "For Sale"},{"optionName": "To Rent"}], 
+			"options": [{"optionName": "For Sale", "default": true},{"optionName": "To Rent"}], 
 			"label": "Is the property for sale or to rent?", 
 			"error":"You must select at least one radio button.",
 			"house": true,
@@ -49,7 +51,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "1"
 		}
 	},
 	{
@@ -62,7 +65,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "2"
 		}
 	},
 	{
@@ -75,7 +79,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "3"
 		}
 	},
 	{
@@ -88,7 +93,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": true,
-			"validate": true
+			"validate": true,
+			"default": "4"
 		}
 	},
 	{
@@ -101,7 +107,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": false,
-			"validate": true
+			"validate": true,
+			"default": "5"
 		}
 	},
 	{
@@ -114,7 +121,8 @@
 			"error":"You must only enter numeric characters.",
 			"house": true,
 			"flat": false,
-			"validate": true
+			"validate": true,
+			"default": "6"
 		}
 	}
 ]

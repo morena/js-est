@@ -1,8 +1,9 @@
 <form data-hw-module="widgets/form/AddPropertyForm" class="formWrapper">
 	<div class="formContent">
+		<a href="#" class="auotPopulateForm">Auto Populate Form</a>
 		<div class="question" data-validation-type="radio" data-validate="true">
 			<label for="propertyType">Type of property:</label>
-			<input type="radio" id="1" class="propertyType" name="propertyType" value="flat">Flat</input>
+			<input type="radio" id="1" class="propertyType" name="propertyType" value="flat" data-hw-default="true">Flat</input>
 			<input type="radio" id="2" class="propertyType" name="propertyType" value="house">House</input>
 			<span class="error">You must select at least one radio button.</span>
 		</div>

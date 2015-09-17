@@ -3,14 +3,14 @@
 	data-validation-type="{{validation}}" {{^flat}} data-flat="false"{{/flat}} {{#validate}} data-validate="{{validate}}"{{/validate}}>
 	<label for="{{name}}">{{label}}:</label>
 	{{#textField}}
-	    <input type="text" id="{{name}}" name="{{name}}" />
+	    <input type="text" id="{{name}}" name="{{name}}" data-hw-default="{{default}}" />
 	{{/textField}}
 	{{#textareaField}}
-	    <textarea id="{{name}}" name="{{name}}"></textarea>
+	    <textarea id="{{name}}" name="{{name}}" data-hw-default="{{default}}"></textarea>
 	{{/textareaField}}
 	{{#radioField}}
 		{{#options}}
-			<input type="radio" name="{{name}}" value="{{optionName}}">{{optionName}}</input>
+			<input type="radio" name="{{name}}" value="{{optionName}}" {{#default}} data-hw-default="true"{{/default}}>{{optionName}}</input>
 		{{/options}}
 	{{/radioField}}
 	<span class="error">{{error}}</span>
