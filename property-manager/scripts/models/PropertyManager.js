@@ -7,15 +7,18 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 		add: function(property){
 			//console.log(this.properties);
 			var id = randomNumber.generateRandomN();
-			if(this.properties[id]){
+			//console.log("randomID",id);
+			//console.log("is this.properties[id] set?", this.properties[id]);
+			/*if(this.properties[id]){
 				this.add(property);
-			}else{
+			}else{*/
+			console.log( (undefined == this.properties[id]) );
+			if(undefined == this.properties[id]){
 				this.properties[id] = property;
 			}
+			//}
 
 			this.latestPropertyAddedId = id;
-
-			//console.log(this.properties);
 		},
 
 		getProperties: function(){

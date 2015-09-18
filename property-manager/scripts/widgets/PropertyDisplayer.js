@@ -13,9 +13,14 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 				$(self.view).html("");
 				$(self.view).append('<h2>List of all properties added</h2>');
 
+				console.log(PropertyManager.properties);
+
 				for( var key in PropertyManager.properties){
+					console.log(key);
+					console.log(PropertyManager.properties[key]);
 					var property = PropertyManager.properties[key],
 						rendered = Mustache.render(template, {property:property});
+						//console.log(property);
 					$(self.view).append(rendered);
 				}
 					

@@ -12,8 +12,15 @@ define([], function(){
 			if(!this.registeredEvents[eventName]){
 				this.registeredEvents[eventName] = [];
 			}
-
-			this.registeredEvents[eventName].push(callback);
+			if(this.registeredEvents[eventName].length == 0){
+				this.registeredEvents[eventName].push(callback);
+			}else{
+				for( var i = 0; i < this.registeredEvents[eventName].length; i++){
+					if(callback != this.registeredEvents[eventName][i]){
+						this.registeredEvents[eventName].push(callback);
+					}
+				}
+			}
 		},
 
 		/* Fires the event */
