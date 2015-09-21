@@ -1,3 +1,5 @@
+'use strict';
+
 define(['./Property'], function(Property){
 	var Flat = compose(Property, function() {
 		type:'Flat'

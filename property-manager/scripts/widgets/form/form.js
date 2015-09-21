@@ -1,3 +1,5 @@
+'use strict';
+
 define(['jquery', 'mustache'], function($, Mustache){
 	var form = {
 		

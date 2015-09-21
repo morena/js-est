@@ -1,3 +1,5 @@
+'use strict';
+
 define(['jquery', './registry'], function($, registry){
 	return {
 		parse: function(callback, $el){

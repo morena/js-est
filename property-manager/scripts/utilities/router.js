@@ -1,3 +1,5 @@
+'use strict';
+
 define(["jquery"], function($){
 	
 	function supports_history_api() {

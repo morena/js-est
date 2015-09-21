@@ -1,3 +1,5 @@
+'use strict';
+
 define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache, PropertyManager){
 	var PropertyDisplayer = {
 
@@ -9,22 +11,22 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 
  			if(this.propertyTemplate){
  				callback(this.propertyTemplate);
- 			}
-
-			//$.when is only for multiple ajax calls
-			$.ajax({url: "../../data/propertyTemplate.mst", dataType: 'text'})
-			.done(function(template){
-				
-				Mustache.parse(template);
-
-				self.propertyTemplate = template;
-
-				callback(template);
+ 			}else{
+				//$.when is only for multiple ajax calls
+				$.ajax({url: "../../data/propertyTemplate.mst", dataType: 'text'})
+				.done(function(template){
 					
-			})
-			.fail(function(){
-				alert("Sorry there was an error.");
-			});
+					Mustache.parse(template);
+
+					self.propertyTemplate = template;
+
+					callback(template);
+						
+				})
+				.fail(function(){
+					alert("Sorry there was an error.");
+				});
+			}
  		},
 
 		viewAllProperties: function(){

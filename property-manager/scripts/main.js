@@ -1,4 +1,5 @@
 'use strict';
+
 define(['jquery', 'utilities/parser', 'utilities/registry', 'utilities/router','widgets/form/form', 'widgets/PropertyDisplayer'], 
 	function($, parser, registry, router, form, PropertyDisplayer){
 

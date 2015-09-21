@@ -1,3 +1,5 @@
+'use strict';
+
 define([], function(){
 
 	compose = function(Base, proto){

@@ -1,4 +1,7 @@
+'use strict';
+
 define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache, randomNumber){
+
 	var PropertyManager = {
 		properties: {},
 
@@ -19,7 +22,7 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 		removeProperty: function(propertyId){
 			var self = this;
 
-			if(!undefined === property){
+			if(undefined !== property){
 				var property = this.properties[propertyId];
 			}else{
 				var latestPropertyAddedId = this.latestPropertyAddedId;

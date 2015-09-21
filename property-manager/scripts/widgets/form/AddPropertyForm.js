@@ -1,3 +1,5 @@
+'use strict';
+
 define(['./validator', 
 		'../../models/PropertyManager', 
 		'mustache', '../../models/House', 

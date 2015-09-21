@@ -1,3 +1,5 @@
+'use strict';
+
 define(['./Property'], function(Property){
 	var House = compose(Property, {
 		type:'House',

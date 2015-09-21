@@ -1,3 +1,5 @@
+'use strict';
+
 define(['jquery', '../../utilities/events'], function($, events){
 	var Validator = compose(events, {
 		

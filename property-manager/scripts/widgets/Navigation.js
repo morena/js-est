@@ -1,3 +1,5 @@
+'use strict';
+
 define(['../utilities/router', 'jquery'], 
 	function(router, $){
 	
