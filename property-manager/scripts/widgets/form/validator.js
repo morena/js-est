@@ -34,9 +34,9 @@ define(['jquery', '../../utilities/events'], function($, events){
 			}
 		},
 
-		addToFormData: function(field, data){
+		/*addToFormData: function(field, data){
 			this.formData[field] = data;
-		},
+		},*/
 
 		bindEvents: function(){
 
@@ -47,6 +47,21 @@ define(['jquery', '../../utilities/events'], function($, events){
 				e.preventDefault();
 				self.evaluateForm();
 			});
+		},
+
+		getFormData: function(){
+			var data = {};
+
+			this.$questions.each(function(){
+				$question = $(this),
+				$field = $question.find("input,select,textarea"),
+				fieldName = $field.attr("name"),
+				value = $field.val();
+
+				data[fieldName] = value;
+			});
+
+			return data;
 		},
 
 		validateForm: function(){
@@ -69,7 +84,7 @@ define(['jquery', '../../utilities/events'], function($, events){
 					if(validate === true){
 						valid = rules[type]($field);
 					}
-					validator.addToFormData(fieldName, value);
+					//validator.addToFormData(fieldName, value);
 
 				if(valid){
 					//remove the error if already showing
@@ -86,8 +101,9 @@ define(['jquery', '../../utilities/events'], function($, events){
 		},
 		
 		evaluateForm: function(){
-			var isFormValid = this.validateForm();
-			this.trigger('validate', isFormValid, this);
+			var isFormValid = this.validateForm(),
+				formData = this.getFormData();
+			this.trigger('validate', isFormValid, formData);
 		},
 
 		postRender: function(form){

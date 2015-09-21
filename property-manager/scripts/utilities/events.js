@@ -28,13 +28,10 @@ define([], function(){
 			var eventn = this.registeredEvents[eventName];
 			if(eventn){
 				var args = Array.prototype.slice.call(arguments, 1);
-				//console.log("event "+eventName+" has been registered");
 				for(var i = 0; i < eventn.length; i++){
 					eventn[i].apply(null, args);
 				}
-			}/*else{
-				console.log("the event "+eventName+" has NOT been registered yet");
-			}*/
+			}
 		},
 
 		off: function(eventName, callback){

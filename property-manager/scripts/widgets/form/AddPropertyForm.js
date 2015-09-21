@@ -24,8 +24,8 @@ define(['./validator',
 		},
 
 		//custom Validator handler!
-		validationHandler: function(isValid, self){
-			var property = self.formData;
+		validationHandler: function(isValid, formData){
+			var property = formData;
 
 			if(isValid === true){
 				PropertyManager.add(property);

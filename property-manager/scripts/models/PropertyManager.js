@@ -5,19 +5,10 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 		latestPropertyAddedId: 0,
 
 		add: function(property){
-			//console.log(this.properties);
 			var id = randomNumber.generateRandomN();
-			//console.log("randomID",id);
-			//console.log("is this.properties[id] set?", this.properties[id]);
-			/*if(this.properties[id]){
-				this.add(property);
-			}else{*/
-			console.log( (undefined == this.properties[id]) );
 			if(undefined == this.properties[id]){
 				this.properties[id] = property;
 			}
-			//}
-
 			this.latestPropertyAddedId = id;
 		},
 
@@ -35,9 +26,6 @@ define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache,
 			}
 
 			delete this.properties[latestPropertyAddedId];
-
-			console.log(this.properties);
-
 
 			$(self.divForSingle).html("");
 
