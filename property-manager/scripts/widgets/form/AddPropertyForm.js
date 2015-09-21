@@ -39,7 +39,7 @@ define(['./validator',
 			var self = this,
 				$el = this.$el;
 
-			$.when($.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'}))
+			$.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'})
 			.done(function(template){
 				var house = new House(),
 					allFormProperties = [];

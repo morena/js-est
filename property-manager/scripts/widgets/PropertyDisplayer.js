@@ -2,12 +2,35 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 	var PropertyDisplayer = {
 
 		view: $('#viewContainer'),
+ 		propertyTemplate: null,
 
-		viewAllProperties: function(){
-			self = this;
-			$.when($.ajax({url: "../../data/propertyTemplate.mst", dataType: 'text'}))
+ 		getPropertyTemplate: function(callback){
+ 			var self = this;
+
+ 			if(this.propertyTemplate){
+ 				callback(this.propertyTemplate);
+ 			}
+
+			//$.when is only for multiple ajax calls
+			$.ajax({url: "../../data/propertyTemplate.mst", dataType: 'text'})
 			.done(function(template){
 				
+				Mustache.parse(template);
+
+				self.propertyTemplate = template;
+
+				callback(template);
+					
+			})
+			.fail(function(){
+				alert("Sorry there was an error.");
+			});
+ 		},
+
+		viewAllProperties: function(){
+			var self = this;
+
+ 			this.getPropertyTemplate(function(template){
 				Mustache.parse(template);
 
 				$(self.view).html("");
@@ -18,11 +41,6 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 						rendered = Mustache.render(template, {property:property});
 					$(self.view).append(rendered);
 				}
-					
-				
-			})
-			.fail(function(){
-				alert("Sorry there was an error.");
 			});
 		},
 
@@ -31,19 +49,13 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 				propertyId = propertyId || PropertyManager.latestPropertyAddedId,
 				property = PropertyManager.properties[propertyId];
 
-			$.when($.ajax({url: "../data/propertyTemplate.mst", dataType: 'text'}))
-				.done(function(template){
-					
-					Mustache.parse(template);
+			this.getPropertyTemplate(function(template){
+				Mustache.parse(template);
 
-					rendered = Mustache.render(template, {property:property});
-					$(self.view).html("");
-					$(self.view).append('<h2>Latest property added</h2>');
-					$(self.view).append(rendered);
-					
-				})
-				.fail(function(){
-					alert("Sorry there was an error.");
+				rendered = Mustache.render(template, {property:property});
+				$(self.view).html("");
+				$(self.view).append('<h2>Latest property added</h2>');
+				$(self.view).append(rendered);
 			});
 
 		},

@@ -6,7 +6,7 @@ define(['jquery', 'mustache'], function($, Mustache){
 		populateForm: function(){
 			var self = this;
 
-			return $.when($.ajax({url: "../data/form.mst", dataType: 'text'}))
+			return $.ajax({url: "../data/form.mst", dataType: 'text'})
 			.done(function(formTemplate){
 				
 				Mustache.parse(formTemplate);
