@@ -2,7 +2,7 @@
 
 define([], function(){
 
-	compose = function(Base, proto){
+	var compose = function(Base, proto){
 
 		var Constructor = function(){
 

@@ -6,7 +6,7 @@ define(["jquery"], function($){
 	  return !!(window.history && history.pushState);
 	}
 
-	router = {
+	var router = {
 
 		_routes: [],
 

@@ -5,8 +5,9 @@ define(['./validator',
 		'mustache', '../../models/House', 
 		"../../utilities/router", 
 		"jquery",
-		"../../utilities/randomNumber"], 
-	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber){
+		"../../utilities/randomNumber",
+		"../../utilities/compose"], 
+	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber, compose){
 	
 	var AddPropertyForm = compose(Validator, {
 		
@@ -91,9 +92,10 @@ define(['./validator',
 		postRender: function(){
 			var self = this,
 				validator = new Validator();
-			$el = this.$el;
+			//$el = self.$el;
+			console.log(self.$el);
 
-			validator.postRender($el);
+			/*validator.postRender($el);
 
 			self.$formWrapper = $(".formContent",$el);
 			
@@ -103,7 +105,7 @@ define(['./validator',
 
 			$('.auotPopulateForm').on("click", function(event){
 				self.autoPopulateForm(event);
-			});
+			});*/
 
 		},
 

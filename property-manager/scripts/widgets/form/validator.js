@@ -1,6 +1,6 @@
 'use strict';
 
-define(['jquery', '../../utilities/events'], function($, events){
+define(['jquery', '../../utilities/events', "../../utilities/compose"], function($, events, compose){
 	var Validator = compose(events, {
 		
 		initialise: function(form){

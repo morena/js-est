@@ -4,7 +4,7 @@ define([], function(){
 
 	var idCount = 0;
 
-	randomNumber = {
+	var randomNumber = {
 		generateRandomN: function(){
 			var min = 1,
 				max = 1000;
