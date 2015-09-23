@@ -54,7 +54,7 @@ define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache
 			this.getPropertyTemplate(function(template){
 				Mustache.parse(template);
 
-				rendered = Mustache.render(template, {property:property});
+				var rendered = Mustache.render(template, {property:property});
 				$(self.view).html("");
 				$(self.view).append('<h2>Latest property added</h2>');
 				$(self.view).append(rendered);

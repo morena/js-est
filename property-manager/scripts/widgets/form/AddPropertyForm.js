@@ -54,7 +54,7 @@ define(['./validator',
 				house.getData(function(formProperties2){
 
 					for (var i = 0; i < formProperties2.length; i++) {
-						for(key in formProperties2[i]){
+						for(var key in formProperties2[i]){
 							allFormProperties.push(formProperties2[i][key]);
 						}
 					};
@@ -91,11 +91,10 @@ define(['./validator',
 
 		postRender: function(){
 			var self = this,
-				validator = new Validator();
-			//$el = self.$el;
-			console.log(self.$el);
+				validator = new Validator(),
+				$el = self.$el;
 
-			/*validator.postRender($el);
+			validator.postRender($el);
 
 			self.$formWrapper = $(".formContent",$el);
 			
@@ -105,7 +104,7 @@ define(['./validator',
 
 			$('.auotPopulateForm').on("click", function(event){
 				self.autoPopulateForm(event);
-			});*/
+			});
 
 		},
 

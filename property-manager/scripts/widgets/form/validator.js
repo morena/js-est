@@ -55,7 +55,7 @@ define(['jquery', '../../utilities/events', "../../utilities/compose"], function
 			var data = {};
 
 			this.$questions.each(function(){
-				$question = $(this),
+				var $question = $(this),
 				$field = $question.find("input,select,textarea"),
 				fieldName = $field.attr("name"),
 				value = $field.val();
