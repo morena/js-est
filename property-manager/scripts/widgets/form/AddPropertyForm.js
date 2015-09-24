@@ -6,24 +6,23 @@ define(['./validator',
 		"../../utilities/router", 
 		"jquery",
 		"../../utilities/randomNumber",
-		"../../utilities/compose"], 
-	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber, compose){
+		"../../utilities/compose", 
+		'text!/data/fieldTemplate.mst'], 
+	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber, compose, fieldTemplate){
 	
 	var AddPropertyForm = compose(Validator, {
 		
 		$divToPopulate: null,
 
 		initialise: function($el){
-			var self = this;
-			
 			this.$el = $el;
 			//Validator.prototype.initialise.apply(this, $el);
 
 			this.populateForm($el);
 
-			self.on('validate', self.validationHandler);
+			this.on('validate', this.validationHandler);
 
-			self.postRender();
+			this.postRender();
 		},
 
 		//custom Validator handler!
@@ -40,44 +39,41 @@ define(['./validator',
 
 		populateForm: function(){
 			var self = this,
-				$el = this.$el;
+				$el = this.$el,
+				output = '',
+				house = new House(),
+				allFormProperties = [];
+			
+			this.$divToPopulate = $(".formInner",$el);
 
-			$.ajax({url: "../data/fieldTemplate.mst", dataType: 'text'})
-			.done(function(template){
-				var house = new House(),
-					allFormProperties = [];
+			Mustache.parse(fieldTemplate);
+
+			house.getData(function(formProperties2){
+
+				for (var i = 0; i < formProperties2.length; i++) {
+					for(var key in formProperties2[i]){
+						allFormProperties.push(formProperties2[i][key]);
+					}
+				};
+
+				allFormProperties = allFormProperties.reverse();
+
+				for (var i = 0; i < allFormProperties.length; i++) {
+					var field = allFormProperties[i],
+						rendered = Mustache.render(fieldTemplate, {field:field});
+					output+= rendered;
+					
+				};
 				
-				self.$divToPopulate = $(".formInner",$el);
+				self.$divToPopulate.prepend(output);	
 
-				Mustache.parse(template);
+				//running this again to pick up on new dom fields added dynamically
+				//probably not the best of ways...
+				//Validator.prototype.initialise.apply(this, $el);
+				self.postRender();
 
-				house.getData(function(formProperties2){
-
-					for (var i = 0; i < formProperties2.length; i++) {
-						for(var key in formProperties2[i]){
-							allFormProperties.push(formProperties2[i][key]);
-						}
-					};
-
-					allFormProperties = allFormProperties.reverse();
-
-					for (var i = 0; i < allFormProperties.length; i++) {
-						var field = allFormProperties[i],
-							rendered = Mustache.render(template, {field:field});
-						
-						self.$divToPopulate.prepend(rendered);	
-					};
-
-					//running this again to pick up on new dom fields added dynamically
-					//probably not the best of ways...
-					//Validator.prototype.initialise.apply(self, $el);
-					self.postRender();
-
-				});
-			})
-			.fail(function(){
-				alert("Sorry there was an error.");
 			});
+
 		},
 
 		manageFields: function(value, $el){

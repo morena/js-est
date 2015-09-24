@@ -1,6 +1,6 @@
 'use strict';
 
-define(["jquery", "../utilities/compose"], function($, compose){
+define(["jquery", "../utilities/compose", "text!/data/formProperties.json"], function($, compose, formProperties){
 	
 	var Property = compose({
 		size: 0,
@@ -28,15 +28,7 @@ define(["jquery", "../utilities/compose"], function($, compose){
 
 		getData: function(callback){
 			var self = this;
-
-			$.ajax({
-				url: "../../data/formProperties.json", 
-				dataType: 'text'
-			}).done(function(data) {
-				callback($.parseJSON(data));
-			}).fail(function(error){
-				console.log(error);
-			});
+			callback($.parseJSON(formProperties));
 		}
 
 

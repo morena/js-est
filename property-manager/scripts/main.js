@@ -17,9 +17,9 @@ define(['jquery',
 
 	router.route('/add', function(){
 		//show the add view
-		form.populateForm().then(function(){
-			parser.parse(null, view);
-		});
+		form.populateForm();
+		parser.parse(null, view);
+
 	});
 
 	router.route('/added', function(){

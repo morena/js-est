@@ -5,7 +5,8 @@ requirejs.config({
     baseUrl: 'scripts',
     paths: {
         jquery: 	'/scripts/lib/jquery',
-        mustache: 	'/scripts/lib/mustache'
+        mustache: 	'/scripts/lib/mustache',
+        text: 		'/scripts/lib/text'
     }
 });
 

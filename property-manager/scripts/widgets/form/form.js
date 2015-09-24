@@ -1,30 +1,21 @@
 'use strict';
 
-define(['jquery', 'mustache'], function($, Mustache){
+define(['jquery', 'mustache', 'text!/data/form.mst'], function($, Mustache, formTemplate){
 	var form = {
 		
 		$el: null,
 
 		populateForm: function(){
-			var self = this;
+			var self = this,
+			formRendered = Mustache.render(formTemplate);
 
-			return $.ajax({url: "../data/form.mst", dataType: 'text'})
-			.done(function(formTemplate){
-				
-				Mustache.parse(formTemplate);
-				
-				var formRendered = Mustache.render(formTemplate);
-				
-				$('#viewContainer').html(formRendered);	
+			Mustache.parse(formTemplate);
+			
+			$('#viewContainer').html(formRendered);	
 
-				self.$el = $('form');
-			})
+			self.$el = $('form');
 
-
-			.fail(function(){
-				alert("Sorry there was an error.");
-			});
-		},
+		}
 	}
 
 	return form;
