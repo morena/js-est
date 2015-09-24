@@ -25,7 +25,6 @@ define(['jquery',
 	router.route('/added', function(){
 		//confirm property has been added and display it
 		var viewPropertyObj = new viewProperty();
-		console.log(viewPropertyObj);
 		viewPropertyObj.viewProperty();
 	});
 
