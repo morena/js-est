@@ -1,27 +1,35 @@
 'use strict';
 
-define(["jquery", "mustache", "../models/PropertyManager"], function($, Mustache, PropertyManager){
-	var PropertyDisplayer = {
+define(["jquery", 
+	"mustache",
+	"../models/PropertyManager", 
+	'./propertyDisplayer', 
+	'../utilities/compose'], 
 
-		view: $('#viewContainer'),
+	function($, Mustache, PropertyManager, compose, propertyDisplayer){
 
-		viewAllProperties: function(){
-			var self = this;
+		var viewAllProperties = compose(propertyDisplayer, {
 
- 			this.getPropertyTemplate(function(template){
-				Mustache.parse(template);
+			view: $('#viewContainer'),
 
-				$(self.view).html("");
-				$(self.view).append('<h2>List of all properties added</h2>');
+			viewAllProperties: function(){
+				console.log(this);
+				var self = this;
 
-				for( var key in PropertyManager.properties){
-					var property = PropertyManager.properties[key],
-						rendered = Mustache.render(template, {property:property});
-					$(self.view).append(rendered);
-				}
-			});
-		},
-	};
+	 			this.getPropertyTemplate(function(template){
+					Mustache.parse(template);
 
-	return PropertyDisplayer;
+					$(self.view).html("");
+					$(self.view).append('<h2>List of all properties added</h2>');
+
+					for( var key in PropertyManager.properties){
+						var property = PropertyManager.properties[key],
+							rendered = Mustache.render(template, {property:property});
+						$(self.view).append(rendered);
+					}
+				});
+			}
+		});
+
+		return viewAllProperties;
 });

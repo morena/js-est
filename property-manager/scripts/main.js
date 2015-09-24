@@ -24,14 +24,16 @@ define(['jquery',
 
 	router.route('/added', function(){
 		//confirm property has been added and display it
-		console.log(viewProperty);
-		viewProperty.viewProperty();
+		var viewPropertyObj = new viewProperty();
+		console.log(viewPropertyObj);
+		viewPropertyObj.viewProperty();
 	});
 
 
 	router.route('/viewAllProperties', function(){
 		//show all the properties added so far
-		viewAllProperties.viewAllProperties();
+		var viewAllPropertiesObj = new viewAllProperties();
+		viewAllPropertiesObj.viewAllProperties();
 	});
 
 	router.start();
