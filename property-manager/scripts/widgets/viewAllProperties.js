@@ -13,7 +13,8 @@ define(["jquery",
 			view: $('#viewContainer'),
 
 			viewAllProperties: function(){
-				var self = this;
+				var self = this,
+					output = '';
 
 	 			this.getPropertyTemplate(function(template){
 					Mustache.parse(template);
@@ -24,8 +25,9 @@ define(["jquery",
 					for( var key in PropertyManager.properties){
 						var property = PropertyManager.properties[key],
 							rendered = Mustache.render(template, {property:property});
-						$(self.view).append(rendered);
+							output+= rendered;
 					}
+					$(self.view).append(output);
 				});
 			}
 		});
