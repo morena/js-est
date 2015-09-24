@@ -1,6 +1,6 @@
 'use strict';
 
-define(["./compose"], function(compose){
+define(["utilities/compose"], function(compose){
 
 	var events = compose({
 		registeredEvents: {},

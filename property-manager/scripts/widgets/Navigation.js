@@ -1,6 +1,6 @@
 'use strict';
 
-define(['../utilities/router', 'jquery', "../utilities/compose"], 
+define(['utilities/router', 'jquery', "utilities/compose"], 
 	function(router, $, compose){
 	
 	var Navigation = compose({

@@ -1,6 +1,6 @@
 'use strict';
 
-define(['./Property', '../utilities/compose'], function(Property, compose){
+define(['models/Property', 'utilities/compose'], function(Property, compose){
 	var House = compose(Property, {
 		type:'House',
 		numberOfFloors: 0,

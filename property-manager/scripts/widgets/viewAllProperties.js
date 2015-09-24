@@ -2,9 +2,9 @@
 
 define(["jquery", 
 	"mustache",
-	"../models/PropertyManager", 
-	'./propertyDisplayer', 
-	'../utilities/compose'], 
+	"models/PropertyManager", 
+	'widgets/propertyDisplayer', 
+	'utilities/compose'], 
 
 	function($, Mustache, PropertyManager, propertyDisplayer, compose){
 

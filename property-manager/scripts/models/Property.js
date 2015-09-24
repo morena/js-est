@@ -1,6 +1,6 @@
 'use strict';
 
-define(["jquery", "../utilities/compose", "text!/data/formProperties.json"], function($, compose, formProperties){
+define(["jquery", "utilities/compose", "text!/data/formProperties.json"], function($, compose, formProperties){
 	
 	var Property = compose({
 		size: 0,

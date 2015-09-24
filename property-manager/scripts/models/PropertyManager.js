@@ -1,6 +1,6 @@
 'use strict';
 
-define(['jquery','mustache', '../utilities/randomNumber'], function($, Mustache, randomNumber){
+define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, randomNumber){
 
 	var PropertyManager = {
 		properties: [],

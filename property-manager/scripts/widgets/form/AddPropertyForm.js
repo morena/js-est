@@ -1,12 +1,13 @@
 'use strict';
 
-define(['./validator', 
-		'../../models/PropertyManager', 
-		'mustache', '../../models/House', 
-		"../../utilities/router", 
+define(['widgets/form/validator', 
+		'models/PropertyManager', 
+		'mustache', 
+		'models/House', 
+		"utilities/router", 
 		"jquery",
-		"../../utilities/randomNumber",
-		"../../utilities/compose", 
+		"utilities/randomNumber",
+		"utilities/compose", 
 		'text!/data/fieldTemplate.mst'], 
 	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber, compose, fieldTemplate){
 	
@@ -56,7 +57,7 @@ define(['./validator',
 					}
 				};
 
-				allFormProperties = allFormProperties.reverse();
+				//allFormProperties = allFormProperties.reverse();
 
 				for (var i = 0; i < allFormProperties.length; i++) {
 					var field = allFormProperties[i],
