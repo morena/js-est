@@ -6,7 +6,7 @@ define(["jquery", "mustache", "../models/PropertyManager", '../utilities/compose
  		propertyTemplate: null,
 
  		initialise: function(){
-			console.log("morens");
+
 		},
 
  		getPropertyTemplate: function(callback){

@@ -6,14 +6,13 @@ define(["jquery",
 	'./propertyDisplayer', 
 	'../utilities/compose'], 
 
-	function($, Mustache, PropertyManager, compose, propertyDisplayer){
+	function($, Mustache, PropertyManager, propertyDisplayer, compose){
 
 		var viewAllProperties = compose(propertyDisplayer, {
 
 			view: $('#viewContainer'),
 
 			viewAllProperties: function(){
-				console.log(this);
 				var self = this;
 
 	 			this.getPropertyTemplate(function(template){
