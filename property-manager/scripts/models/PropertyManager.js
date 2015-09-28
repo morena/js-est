@@ -13,6 +13,7 @@ define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, ra
 				this.properties[id] = property;
 			}
 			this.latestPropertyAddedId = id;
+			console.log(this.properties);
 		},
 
 		getProperties: function(){

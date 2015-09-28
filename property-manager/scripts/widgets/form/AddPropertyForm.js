@@ -3,13 +3,22 @@
 define(['widgets/form/validator', 
 		'models/PropertyManager', 
 		'mustache', 
-		'models/House', 
+		'models/Property', 
+		'models/House',
 		"utilities/router", 
 		"jquery",
 		"utilities/randomNumber",
 		"utilities/compose", 
 		'text!/data/fieldTemplate.mst'], 
-	function(Validator, PropertyManager, Mustache, House, router, $, randomNumber, compose, fieldTemplate){
+	function(Validator, 
+		PropertyManager, 
+		Mustache, Property, 
+		House, 
+		router, 
+		$, 
+		randomNumber, 
+		compose, 
+		fieldTemplate){
 	
 	var AddPropertyForm = compose(Validator, {
 		
@@ -129,13 +138,12 @@ define(['widgets/form/validator',
 		},
 
 		addProperties: function(event){
-			var house = new House();
 			event.preventDefault();
-			/*//PropertyManager.generateProperties(5);
-			house.getData(function(formProperties2){
-				console.log(formProperties2);
-			});*/
-			house.generateProperty();
+			var propertyObj = new Property();
+			for(var i = 0; i < 4; i++){
+				var property = propertyObj.generateProperty();
+				PropertyManager.add(property);
+			}
 		}
 	});
 
