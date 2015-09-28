@@ -140,7 +140,7 @@ define(['widgets/form/validator',
 		addProperties: function(event){
 			event.preventDefault();
 			var propertyObj = new Property();
-			for(var i = 0; i < 4; i++){
+			for(var i = 0; i < 2; i++){
 				var property = propertyObj.generateProperty();
 				PropertyManager.add(property);
 			}

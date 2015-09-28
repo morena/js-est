@@ -13,7 +13,6 @@ define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, ra
 				this.properties[id] = property;
 			}
 			this.latestPropertyAddedId = id;
-			console.log(this.properties);
 		},
 
 		getProperties: function(){
@@ -23,15 +22,9 @@ define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, ra
 		removeProperty: function(propertyId){
 			var self = this;
 
-			if(undefined !== property){
-				var property = this.properties[propertyId];
-			}else{
-				var latestPropertyAddedId = this.latestPropertyAddedId;
-			}
-
-			delete this.properties[latestPropertyAddedId];
-
-			$(self.divForSingle).html("");
+			console.log(this.properties);
+			delete this.properties[propertyId];
+			console.log(this.properties);
 
 		}
 	};

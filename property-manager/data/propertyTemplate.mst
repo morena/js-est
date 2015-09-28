@@ -1,5 +1,5 @@
 {{#property}}
-<h3>Property details</h3>
+<h3>Property details <a href="#" class="btn btn-danger removeProperty" data-id="{{id}}">Remove property</a></h3>
 {{#title}}
 <p><strong>Title</strong>: {{title}}</p>
 {{/title}}

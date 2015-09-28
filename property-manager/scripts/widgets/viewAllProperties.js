@@ -11,6 +11,7 @@ define(["jquery",
 		var viewAllProperties = compose(propertyDisplayer, {
 
 			view: $('#viewContainer'),
+			removeBtn: $(".removeProperty"),
 
 			viewAllProperties: function(){
 				var self = this,
@@ -24,10 +25,19 @@ define(["jquery",
 
 					for( var key in PropertyManager.properties){
 						var property = PropertyManager.properties[key],
-							rendered = Mustache.render(template, {property:property});
+							rendered = Mustache.render(template, {property:property, id:key});
 							output+= rendered;
 					}
 					$(self.view).append(output);
+
+					var $removeBtn= $(".removeProperty");
+
+					$removeBtn.on("click", function(event){
+						event.preventDefault();
+						var id = $(this).data('id');
+						PropertyManager.removeProperty(id);
+						self.viewAllProperties();
+					});
 				});
 			}
 		});
