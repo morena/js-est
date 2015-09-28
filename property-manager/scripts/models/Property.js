@@ -1,6 +1,9 @@
 'use strict';
 
-define(["jquery", "utilities/compose", "text!/data/formProperties.json"], function($, compose, formProperties){
+define(["jquery", 
+	"utilities/compose", 
+	"text!/data/formProperties.json", 
+	'utilities/randomNumber'], function($, compose, formProperties, randomNumberObj){
 	
 	var Property = compose({
 		size: 0,
@@ -29,9 +32,29 @@ define(["jquery", "utilities/compose", "text!/data/formProperties.json"], functi
 		getData: function(callback){
 			var self = this;
 			callback($.parseJSON(formProperties));
+		},
+
+		generateProperty: function(){
+			var property = [],
+				randomNumber = randomNumberObj.generateRandomN(),
+				props = $.parseJSON(formProperties);
+			for(var key in props){
+				for(var key1 in props[key]){
+					var propertyDetails = props[key][key1],
+						fieldName = propertyDetails.name,
+						value = propertyDetails.default;
+					if(value == undefined){
+						for (var i = 0; i < propertyDetails.options.length; i++){
+							if(propertyDetails.options[i].default == 1){
+								value = propertyDetails.options[i].optionName;
+							}
+						}
+					}
+					property[fieldName] = value;
+				}
+			}
+			property["propertyType"] = 'Flat';
 		}
-
-
 	});
 
 	return Property;

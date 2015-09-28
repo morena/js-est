@@ -1,6 +1,7 @@
 <form data-hw-module="widgets/form/AddPropertyForm" class="formWrapper">
 	<div class="formContent">
-		<a href="#" class="auotPopulateForm">Auto Populate Form</a>
+		<p><a href="#" class="auotPopulateForm">Auto Populate Form</a></p>
+		<p><a href="#" class="addProperties">Add properties</a></p>
 		<div class="question" data-validation-type="radio" data-validate="true">
 			<label for="propertyType">Type of property:</label>
 			<input type="radio" id="1" class="propertyType" name="propertyType" value="flat" data-hw-default="true">Flat</input>

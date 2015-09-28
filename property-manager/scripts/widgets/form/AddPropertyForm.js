@@ -103,6 +103,10 @@ define(['widgets/form/validator',
 				self.autoPopulateForm(event);
 			});
 
+			$('.addProperties').on("click", function(event){
+				self.addProperties(event);
+			});
+
 		},
 
 		autoPopulateForm: function(event){
@@ -123,6 +127,16 @@ define(['widgets/form/validator',
 				}
 			});
 		},
+
+		addProperties: function(event){
+			var house = new House();
+			event.preventDefault();
+			/*//PropertyManager.generateProperties(5);
+			house.getData(function(formProperties2){
+				console.log(formProperties2);
+			});*/
+			house.generateProperty();
+		}
 	});
 
 	return AddPropertyForm;
