@@ -1,8 +1,10 @@
+<h2>Quick links</h2>
+<a href="#" class="auotPopulateForm btn btn-success">Auto Populate Form</a>
+<a href="#" class="addProperties btn btn-success">Add properties</a>
+
 <form data-hw-module="widgets/form/AddPropertyForm" class="formWrapper">
 	<div class="formContent">
-		<p><a href="#" class="auotPopulateForm">Auto Populate Form</a></p>
-		<p><a href="#" class="addProperties">Add properties</a></p>
-		<div class="question" data-validation-type="radio" data-validate="true">
+		<div class="question form-group" data-validation-type="radio" data-validate="true">
 			<label for="propertyType">Type of property:</label>
 			<input type="radio" id="1" class="propertyType" name="propertyType" value="flat" data-hw-default="true">Flat</input>
 			<input type="radio" id="2" class="propertyType" name="propertyType" value="house">House</input>
@@ -10,8 +12,6 @@
 		</div>
 
 		<div class="formInner"></div>
-		<p>
-			<input type="submit" value="submit" />
-		</p>
+		<button type="submit" value="submit" class="btn btn-success btn-lg">Submit</button
 	</div>
 </form>

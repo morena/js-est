@@ -46,3 +46,6 @@ form div {
 .error{
 	display: none;
 }
+#viewContainer{
+	margin-top:60px;
+}

@@ -4,12 +4,13 @@
 requirejs.config({
     baseUrl: 'scripts',
     paths: {
-        jquery: 	'/scripts/lib/jquery',
-        mustache: 	'/scripts/lib/mustache',
-        text: 		'/scripts/lib/text'
+        jquery: 	'lib/jquery',
+        mustache: 	'lib/mustache',
+        text: 		'lib/text',
+        bootstrap:  'lib/bootstrap'
     }
 });
 
 // Start loading the main app file. Put all of
 // your application logic in there.
-requirejs(['main', 'utilities/compose'/*, 'events'*/]);
+requirejs(['main', 'utilities/compose', 'jquery', 'bootstrap' /*, 'events'*/]);

@@ -36,7 +36,7 @@ define(["jquery",
 
 		generateProperty: function(){
 			var property = {},
-				randomNumber = randomNumberObj.generateRandomN(),
+				randomNumber = randomNumberObj.uniqueId(),
 				props = $.parseJSON(formProperties);
 			for(var key in props){
 				for(var key1 in props[key]){
@@ -50,7 +50,7 @@ define(["jquery",
 							}
 						}
 					}
-					property[fieldName] = value;
+					property[fieldName] = value+randomNumber;
 				}
 			}
 			property["propertyType"] = 'Flat';

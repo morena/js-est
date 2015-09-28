@@ -120,7 +120,7 @@ define(['widgets/form/validator',
 
 		autoPopulateForm: function(event){
 			var self = this,
-				randomN = randomNumber.generateRandomN();
+				randomN = randomNumber.uniqueId();
 			event.preventDefault();
 			$(self.$el.find(".question")).each(function(){
 				var $field = $(this).find("input[data-hw-default],select[data-hw-default],textarea[data-hw-default]"),

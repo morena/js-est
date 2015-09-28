@@ -8,7 +8,7 @@ define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, ra
 		latestPropertyAddedId: 0,
 
 		add: function(property){
-			var id = randomNumber.generateRandomN();
+			var id = randomNumber.uniqueId();
 			if(undefined == this.properties[id]){
 				this.properties[id] = property;
 			}

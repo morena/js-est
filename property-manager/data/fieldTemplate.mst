@@ -1,12 +1,12 @@
 {{#field}}
-<div class="question" 
+<div class="question form-group" 
 	data-validation-type="{{validation}}" {{^flat}} data-flat="false"{{/flat}} {{#validate}} data-validate="{{validate}}"{{/validate}}>
 	<label for="{{name}}">{{label}}:</label>
 	{{#textField}}
-	    <input type="text" id="{{name}}" name="{{name}}" data-hw-default="{{default}}" />
+	    <input type="text" id="{{name}}" name="{{name}}" data-hw-default="{{default}}" class="form-control" />
 	{{/textField}}
 	{{#textareaField}}
-	    <textarea id="{{name}}" name="{{name}}" data-hw-default="{{default}}"></textarea>
+	    <textarea id="{{name}}" name="{{name}}" data-hw-default="{{default}}" class="form-control"></textarea>
 	{{/textareaField}}
 	{{#radioField}}
 		{{#options}}
