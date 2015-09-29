@@ -49,8 +49,10 @@ define(["jquery",
 								value = propertyDetails.options[i].optionName;
 							}
 						}
+						property[fieldName] = value;
+					}else{
+						property[fieldName] = value+randomNumber;
 					}
-					property[fieldName] = value+randomNumber;
 				}
 			}
 			property["propertyType"] = 'Flat';
