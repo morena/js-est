@@ -1,6 +1,6 @@
 'use strict';
 
-define(['jquery', 'mustache', 'text!/data/form.mst'], function($, Mustache, formTemplate){
+define(['jquery', 'mustache', 'text!/templates/form.mst'], function($, Mustache, formTemplate){
 	var form = {
 		
 		$el: null,

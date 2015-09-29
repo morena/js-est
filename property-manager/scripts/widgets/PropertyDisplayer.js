@@ -4,7 +4,7 @@ define(["jquery",
 	"mustache", 
 	"models/PropertyManager", 
 	'utilities/compose', 
-	'text!/data/propertyTemplate.mst'], 
+	'text!/templates/propertyTemplate.mst'], 
 	function($, Mustache, PropertyManager, compose, propertyTemplate){
 		var propertyDisplayer = compose({
 
