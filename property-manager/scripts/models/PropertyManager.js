@@ -1,6 +1,9 @@
 'use strict';
 
-define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, randomNumber){
+define(['jquery',
+	'mustache', 
+	'utilities/randomNumber',
+	'models/Property'], function($, Mustache, randomNumber, Property){
 
 	var PropertyManager = {
 		properties: [],
@@ -21,11 +24,15 @@ define(['jquery','mustache', 'utilities/randomNumber'], function($, Mustache, ra
 
 		removeProperty: function(propertyId){
 			var self = this;
-
-			console.log(this.properties);
 			delete this.properties[propertyId];
-			console.log(this.properties);
+		},
 
+		addProperties: function(){
+			var propertyObj = new Property();
+			for(var i = 0; i < 4; i++){
+				var property = propertyObj.generateProperty();
+				this.add(property);
+			}
 		}
 	};
 

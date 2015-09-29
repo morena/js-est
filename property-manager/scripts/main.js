@@ -6,8 +6,9 @@ define(['jquery',
 	'utilities/router',
 	'widgets/form/form', 
 	'widgets/viewProperty', 
-	'widgets/viewAllProperties'], 
-	function($, parser, registry, router, form, viewProperty, viewAllProperties){
+	'widgets/viewAllProperties',
+	'models/PropertyManager'], 
+	function($, parser, registry, router, form, viewProperty, viewAllProperties, PropertyManager){
 
 	var view = $('#viewContainer');
 
@@ -33,6 +34,11 @@ define(['jquery',
 		//show all the properties added so far
 		var viewAllPropertiesObj = new viewAllProperties();
 		viewAllPropertiesObj.viewAllProperties();
+	});
+
+	router.route('/addProperties', function(){
+		PropertyManager.addProperties();
+		router.navigate('/viewAllProperties');
 	});
 
 	router.start();
