@@ -6,21 +6,24 @@ define(['text!/templates/filter.mst',
 	var Filter = compose({
 		
 		view: $('#viewContainer'),
+		
+		rangeFields: {'nBedrooms', 'nRooms'},
 
 		initialise: function($el){
 			this.$el = $el;
 		},
 		
-		allNBedrooms: function () {
-			var nBedrooms = [],
-				currentNBedrooms = 0;
+
+		calcValues: function(item){
+			var itemsArray = [],
+				currentItem = 0;
 
 			this.$el.find(".property").each(function(){
-				currentNBedrooms = $('p[data-nBedrooms]', this).attr('data-nBedrooms');
-				nBedrooms.push(currentNBedrooms);
+				currentItem = $('p[data-'+item']', this).attr('data-'+item);
+				itemsArray.push(currentItem);
 			});
 
-			return nBedrooms;
+			return itemsArray;
 		},
 
 		calcMin: function(array){
@@ -45,12 +48,20 @@ define(['text!/templates/filter.mst',
 		},
 
 		parseEl: function(){
-			var data = {},
-				nBedrooms = this.allNBedrooms();
+			var data = {};
+
+			for(var key in this.rangeFields){
+				
+				var itemsArray = calcValues(this.rangeFields[key]),
+					minKey = key+'Min',
+					maxKey = key+'Max',
+					middleKey = key+'Middle';
 			
-			data.nBedroomsMin = this.calcMin(nBedrooms);
-			data.nBedroomsMax = this.calcMax(nBedrooms);
-			data.nBedroomsMiddle = this.calcMiddle(data.nBedroomsMin, data.nBedroomsMax);
+				data[minKey] = this.calcMin(itemsArray);
+				data[maxKey] = this.calcMax(itemsArray);
+				data[middleKey] = this.calcMiddle(data[minKey], data[maxKey]);
+
+			}
 
 			Mustache.parse(filterTemplate);
 			var rendered = Mustache.render(filterTemplate, {data:data});

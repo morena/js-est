@@ -23,7 +23,7 @@
 		{{/numberofBedrooms}}
 
 		{{#numberOfRooms}}
-		<p><strong>Number of rooms</strong>: {{numberOfRooms}}</p>
+		<p data-nRooms="{{numberOfRooms}}"><strong>Number of rooms</strong>: {{numberOfRooms}}</p>
 		{{/numberOfRooms}}
 
 		{{#numberOfBathrooms}}
