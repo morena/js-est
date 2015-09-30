@@ -16,7 +16,6 @@ define(['text!/templates/filter.mst',
 				currentNBedrooms = 0;
 
 			this.$el.find(".property").each(function(){
-				console.log('yo');
 				currentNBedrooms = $('p[data-nBedrooms]', this).attr('data-nBedrooms');
 				nBedrooms.push(currentNBedrooms);
 			});
@@ -41,26 +40,26 @@ define(['text!/templates/filter.mst',
 			}
 		},
 
+		calcMiddle: function(min, max){
+			return (+min+ +max)/2;
+		},
+
 		parseEl: function(){
 			var data = {},
 				nBedrooms = this.allNBedrooms();
-			//console.log(nBedrooms);
 			
 			data.nBedroomsMin = this.calcMin(nBedrooms);
 			data.nBedroomsMax = this.calcMax(nBedrooms);
+			data.nBedroomsMiddle = this.calcMiddle(data.nBedroomsMin, data.nBedroomsMax);
 
-			//console.log(data);
-				
 			Mustache.parse(filterTemplate);
 			var rendered = Mustache.render(filterTemplate, {data:data});
-			//console.log(rendered);
 
 			return rendered;
 		},
 
 		getRenderedHtml: function(){
 			var output = this.parseEl(this.$el);
-			//console.log(output);
 			return output;
 		}
 	});

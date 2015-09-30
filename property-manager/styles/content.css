@@ -49,3 +49,16 @@ form div {
 #viewContainer{
 	margin-top:60px;
 }
+.accessible{
+	position: absolute;
+    left: -9999px;
+}
+.filter .rangeItem{
+	display: inline-block;
+}
+.filter input.rangeItem{
+	width:78%;
+}
+.filter output{
+	text-align:center;
+}
