@@ -1,43 +1,44 @@
 {{#property}}
-<h3>Property details <a href="#" class="btn btn-danger removeProperty" data-id="{{id}}">Remove property</a></h3>
-{{#title}}
-<h4>{{title}}</h4>
-{{/title}}
+<div class="property">
+	<h3>Property details <a href="#" class="btn btn-danger removeProperty" data-id="{{id}}">Remove property</a></h3>
+	{{#title}}
+	<h4>{{title}}</h4>
+	{{/title}}
 
-{{#propertyType}}
-<p><strong>Type of property</strong>: {{propertyType}}</p>
-{{/propertyType}}
+	{{#propertyType}}
+	<p><strong>Type of property</strong>: {{propertyType}}</p>
+	{{/propertyType}}
 
-{{#typeOfSale}}
-<p><strong>Is the property for sale or to rent?</strong>: {{typeOfSale}}</p>
-{{/typeOfSale}}
+	{{#typeOfSale}}
+	<p><strong>Is the property for sale or to rent?</strong>: {{typeOfSale}}</p>
+	{{/typeOfSale}}
 
-{{#address}}
-<p><strong>Address</strong>: {{address}}</p>
-{{/address}}
+	{{#address}}
+	<p><strong>Address</strong>: {{address}}</p>
+	{{/address}}
 
-{{#numberofBedrooms}}
-<p><strong>Number of bedrooms</strong>: {{numberofBedrooms}}</p>
-{{/numberofBedrooms}}
+	{{#numberofBedrooms}}
+	<p data-nBedrooms="{{numberofBedrooms}}"><strong>Number of bedrooms</strong>: {{numberofBedrooms}}</p>
+	{{/numberofBedrooms}}
 
-{{#numberOfRooms}}
-<p><strong>Number of rooms</strong>: {{numberOfRooms}}</p>
-{{/numberOfRooms}}
+	{{#numberOfRooms}}
+	<p><strong>Number of rooms</strong>: {{numberOfRooms}}</p>
+	{{/numberOfRooms}}
 
-{{#numberOfBathrooms}}
-<p><strong>Number of bathrooms</strong>: {{numberOfBathrooms}}</p>
-{{/numberOfBathrooms}}
+	{{#numberOfBathrooms}}
+	<p><strong>Number of bathrooms</strong>: {{numberOfBathrooms}}</p>
+	{{/numberOfBathrooms}}
 
-{{#size}}
-<p><strong>Size of the property (in sqm)</strong>: {{size}}</p>
-{{/size}}
+	{{#size}}
+	<p><strong>Size of the property (in sqm)</strong>: {{size}}</p>
+	{{/size}}
 
-{{#numberOfFloors}}
-<p><strong>Number of floors</strong>: {{numberOfFloors}}</p>
-{{/numberOfFloors}}
+	{{#numberOfFloors}}
+	<p><strong>Number of floors</strong>: {{numberOfFloors}}</p>
+	{{/numberOfFloors}}
 
-{{#gardenSize}}
-<p><strong>Size of the garden (in sqm)</strong>: {{gardenSize}}</p>
-{{/gardenSize}}
-
+	{{#gardenSize}}
+	<p><strong>Size of the garden (in sqm)</strong>: {{gardenSize}}</p>
+	{{/gardenSize}}
+</div>
 {{/property}}

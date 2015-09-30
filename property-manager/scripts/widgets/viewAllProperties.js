@@ -4,9 +4,11 @@ define(["jquery",
 	"mustache",
 	"models/PropertyManager", 
 	'widgets/propertyDisplayer', 
-	'utilities/compose'], 
+	'utilities/compose',
+	'widgets/Filter',
+	'text!/templates/filterWrapper.mst'], 
 
-	function($, Mustache, PropertyManager, propertyDisplayer, compose){
+	function($, Mustache, PropertyManager, propertyDisplayer, compose, Filter, filterWrapper){
 
 		var viewAllProperties = compose(propertyDisplayer, {
 
@@ -15,19 +17,25 @@ define(["jquery",
 
 			viewAllProperties: function(){
 				var self = this,
-					output = '';
+					output = '',
+					propertiesOutput= '';
 
 	 			this.getPropertyTemplate(function(template){
 					Mustache.parse(template);
 
 					$(self.view).html("");
-					$(self.view).append('<h2>List of all properties added</h2>');
 
 					for( var key in PropertyManager.properties){
 						var property = PropertyManager.properties[key],
 							rendered = Mustache.render(template, {property:property, id:key});
-							output+= rendered;
+							propertiesOutput+= rendered;
 					}
+
+					var filterObj = new Filter($(propertiesOutput)),
+						filterContent = filterObj.getRenderedHtml();
+
+					output += Mustache.render(filterWrapper, {content: propertiesOutput, filter: filterContent});
+
 					$(self.view).append(output);
 
 					var $removeBtn= $(".removeProperty");

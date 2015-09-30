@@ -1,0 +1,21 @@
+{{#data}}
+<form oninput="nBedroomsOutput.value = nBedrooms.valueAsNumber">
+	<p>
+		<label for="propertyType">Type of property:</label><br />
+		<input type="checkbox" value="Flat" name="propertyType" />Flat<br />
+		<input type="checkbox" value="House" name="propertyType" />House <br />
+	</p>
+
+	<p>
+		<label for="typeOfSale">Type of property:</label><br />
+		<input type="checkbox" value="For Sale" name="typeOfSale" />For Sale<br />
+		<input type="checkbox" value="To Rent" name="typeOfSale" />To Rent <br />
+	</p>
+
+	<p>
+		<label for="nBedrooms">Number of bedrooms</label>
+		<input type="range" name="nBedrooms" id="nBedrooms" min="{{nBedroomsMin}}" max="{{nBedroomsMax}}" step="1" />
+		<output for="nBedrooms" id="nBedroomsOutput" name="nBedroomsOutput">0</output>
+	</p>
+</form>
+{{/data}}
