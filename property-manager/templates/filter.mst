@@ -16,11 +16,11 @@
 	{{#range}}
 		{{#data}}
 		<p>
-			<label for="{{name}}">Number of bedrooms</label><br />
-			<span class="rangeItem"><span class="accessible">Minimum number of bedrooms found: </span>{{min}}</span>
+			<label for="{{name}}">{{label}}</label><br />
+			<span class="rangeItem"><span class="accessible">Minimum {{label}}: </span>{{min}}</span>
 			<input class="rangeItem" type="range" name="{{name}}" id="{{name}}" min="{{min}}" max="{{max}}" value ="{{middle}}" step="1" />
-			<span class="rangeItem"><span class="accessible">Maximum number of bedrooms found: </span>{{max}}</span>
-			<output for="{{name}}" id="nBedroomsOutput" name="nBedroomsOutput"><span class="accessible">Current slider value: </span>{{nBedroomsMiddle}}</output>
+			<span class="rangeItem"><span class="accessible">Maximum {{label}}: </span>{{max}}</span>
+			<output for="{{name}}" id="{{name}}Output" name="{{name}}Output"><span class="accessible">Current slider value: </span>{{nBedroomsMiddle}}</output>
 		</p>
 		{{/data}}
 	{{/range}}
