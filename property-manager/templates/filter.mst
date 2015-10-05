@@ -12,12 +12,19 @@
 		<input type="checkbox" value="To Rent" name="typeOfSale" />To Rent <br />
 	</p>
 
-	<p>
-		<label for="nBedrooms">Number of bedrooms</label><br />
-		<span class="rangeItem"><span class="accessible">Minimum number of bedrooms found: </span>{{nBedroomsMin}}</span>
-		<input class="rangeItem" type="range" name="nBedrooms" id="nBedrooms" min="{{nBedroomsMin}}" max="{{nBedroomsMax}}" value ="{{nBedroomsMiddle}}" step="1" />
-		<span class="rangeItem"><span class="accessible">Maximum number of bedrooms found: </span>{{nBedroomsMax}}</span>
-		<output for="nBedrooms" id="nBedroomsOutput" name="nBedroomsOutput">{{nBedroomsMiddle}}</output>
-	</p>
+
+	{{#range}}
+		{{#data}}
+		<p>
+			<label for="{{name}}">Number of bedrooms</label><br />
+			<span class="rangeItem"><span class="accessible">Minimum number of bedrooms found: </span>{{min}}</span>
+			<input class="rangeItem" type="range" name="{{name}}" id="{{name}}" min="{{min}}" max="{{max}}" value ="{{middle}}" step="1" />
+			<span class="rangeItem"><span class="accessible">Maximum number of bedrooms found: </span>{{max}}</span>
+			<output for="{{name}}" id="nBedroomsOutput" name="nBedroomsOutput"><span class="accessible">Current slider value: </span>{{nBedroomsMiddle}}</output>
+		</p>
+		{{/data}}
+	{{/range}}
+
+	
 </form>
 {{/data}}

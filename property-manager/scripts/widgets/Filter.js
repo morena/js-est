@@ -7,7 +7,7 @@ define(['text!/templates/filter.mst',
 		
 		view: $('#viewContainer'),
 		
-		rangeFields: {'nBedrooms', 'nRooms'},
+		rangeFields: ['nBedrooms', 'nRooms', 'nBathrooms', 'size', 'nFloors', 'gardenSize'],
 
 		initialise: function($el){
 			this.$el = $el;
@@ -19,7 +19,7 @@ define(['text!/templates/filter.mst',
 				currentItem = 0;
 
 			this.$el.find(".property").each(function(){
-				currentItem = $('p[data-'+item']', this).attr('data-'+item);
+				currentItem = $('p[data-'+item+']', this).attr('data-'+item);
 				itemsArray.push(currentItem);
 			});
 
@@ -51,15 +51,34 @@ define(['text!/templates/filter.mst',
 			var data = {};
 
 			for(var key in this.rangeFields){
-				
-				var itemsArray = calcValues(this.rangeFields[key]),
-					minKey = key+'Min',
-					maxKey = key+'Max',
-					middleKey = key+'Middle';
-			
-				data[minKey] = this.calcMin(itemsArray);
-				data[maxKey] = this.calcMax(itemsArray);
-				data[middleKey] = this.calcMiddle(data[minKey], data[maxKey]);
+
+				var fieldName = this.rangeFields[key],
+					itemsArray = this.calcValues(fieldName),
+					minKey = fieldName+'Min',
+					maxKey = fieldName+'Max',
+					middleKey = fieldName+'Middle',
+					min = 0,
+					max = 0,
+					middle = 0;
+
+				if(undefined == data["range"]){
+					data.range = [];
+				}
+				if(undefined == data["range"][key]){
+					data.range[key] = [];
+				}
+
+				min = this.calcMin(itemsArray);
+				max = this.calcMax(itemsArray);
+				middle = this.calcMiddle(min,max);
+
+				data["range"][key] = {"data": {
+											"name": fieldName,
+											"min":  min,
+											"max":  max,
+											"middle":middle
+											}
+									};
 
 			}
 

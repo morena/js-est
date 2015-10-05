@@ -27,19 +27,19 @@
 		{{/numberOfRooms}}
 
 		{{#numberOfBathrooms}}
-		<p><strong>Number of bathrooms</strong>: {{numberOfBathrooms}}</p>
+		<p data-nBathrooms="{{numberOfBathrooms}}"><strong>Number of bathrooms</strong>: {{numberOfBathrooms}}</p>
 		{{/numberOfBathrooms}}
 
 		{{#size}}
-		<p><strong>Size of the property (in sqm)</strong>: {{size}}</p>
+		<p data-size="{{size}}"><strong>Size of the property (in sqm)</strong>: {{size}}</p>
 		{{/size}}
 
 		{{#numberOfFloors}}
-		<p><strong>Number of floors</strong>: {{numberOfFloors}}</p>
+		<p data-nFloors="{{numberOfFloors}}"><strong>Number of floors</strong>: {{numberOfFloors}}</p>
 		{{/numberOfFloors}}
 
 		{{#gardenSize}}
-		<p><strong>Size of the garden (in sqm)</strong>: {{gardenSize}}</p>
+		<p data-gardenSize="{{gardenSize}}"><strong>Size of the garden (in sqm)</strong>: {{gardenSize}}</p>
 		{{/gardenSize}}
 	</div>
 </div>

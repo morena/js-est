@@ -8,14 +8,14 @@ define(['jquery',
 	var PropertyManager = {
 		properties: [],
 
-		latestPropertyAddedId: 0,
+		//latestPropertyAddedId: 0,
 
 		add: function(property){
 			var id = randomNumber.uniqueId();
 			if(undefined == this.properties[id]){
 				this.properties[id] = property;
 			}
-			this.latestPropertyAddedId = id;
+			//this.latestPropertyAddedId = id;
 		},
 
 		getProperties: function(){

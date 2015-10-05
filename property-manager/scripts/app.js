@@ -8,6 +8,9 @@ requirejs.config({
         mustache: 	'lib/mustache',
         text: 		'lib/text',
         bootstrap:  'lib/bootstrap'
+    },
+    shim: {
+    	bootstrap: ['jquery']
     }
 });
 
