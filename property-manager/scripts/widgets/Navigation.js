@@ -7,6 +7,7 @@ define(['utilities/router', 'jquery', "utilities/compose"],
 		
 		initialise: function($el){
 			this.manageNavLinks($el);
+			this.manageHomeLink();
 		},
 
 		manageNavLinks: function($el){
@@ -17,7 +18,16 @@ define(['utilities/router', 'jquery', "utilities/compose"],
 
 					router.navigate(url);
 				})
-			})
+			});
+		},
+
+		manageHomeLink: function(){
+			$('.homeLink').on("click", function (event) {
+				event.preventDefault();
+				var url = $(this).attr("href");
+
+				router.navigate(url);
+			});
 		}
 	});
 

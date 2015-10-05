@@ -7,13 +7,20 @@ define(['jquery',
 	'widgets/form/form', 
 	'widgets/viewProperty', 
 	'widgets/viewAllProperties',
-	'models/PropertyManager'], 
-	function($, parser, registry, router, form, viewProperty, viewAllProperties, PropertyManager){
+	'models/PropertyManager',
+	'models/Home'], 
+	function($, parser, registry, router, form, viewProperty, viewAllProperties, PropertyManager, Home){
 
 	var view = $('#viewContainer');
 
 	parser.parse(function(){
 		//any custom JS to run on registry's items
+	});
+
+	router.route('/', function(){
+		//show the intro text
+		var HomeObj = new Home();
+		HomeObj.populateHtml();
 	});
 
 	router.route('/add', function(){

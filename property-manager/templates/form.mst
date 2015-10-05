@@ -1,4 +1,5 @@
-<h2>Quick links</h2>
+<h2>Add a property</h2>
+<h3>Quick links</h3>
 <a href="#" class="auotPopulateForm btn btn-success">Auto Populate Form</a>
 
 <form data-hw-module="widgets/form/AddPropertyForm" class="formWrapper">

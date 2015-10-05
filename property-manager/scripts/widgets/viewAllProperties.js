@@ -25,17 +25,22 @@ define(["jquery",
 
 					$(self.view).html("");
 
-					for( var key in PropertyManager.properties){
-						var property = PropertyManager.properties[key],
-							rendered = Mustache.render(template, {property:property, id:key});
-							propertiesOutput+= rendered;
+					if(PropertyManager.properties.length > 0){
+						for( var key in PropertyManager.properties){
+							var property = PropertyManager.properties[key],
+								rendered = Mustache.render(template, {property:property, id:key});
+								propertiesOutput+= rendered;
+						}
+
+						var filterObj = new Filter($(propertiesOutput)),
+							filterContent = filterObj.getRenderedHtml();
+
+						output += Mustache.render(filterWrapper, {content: propertiesOutput, filter: filterContent});
+
+					}else{
+						output = Mustache.render(filterWrapper, {noPropertiesContent: true, filter: false});
 					}
-
-					var filterObj = new Filter($(propertiesOutput)),
-						filterContent = filterObj.getRenderedHtml();
-
-					output += Mustache.render(filterWrapper, {content: propertiesOutput, filter: filterContent});
-
+					
 					$(self.view).append(output);
 
 					var $removeBtn= $(".removeProperty");
